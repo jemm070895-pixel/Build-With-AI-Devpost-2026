@@ -10,6 +10,9 @@ export const CONTEST_WORLD_BASELINE = {
   topDownStrategyView: true,
   zoomUsesLevelOfDetail: true,
   fixedStructuresStayWhereBuilt: true,
+  continuousWorldTime: true,
+  gradualDayNightCycle: true,
+  playerTimeSpeeds: [0, 1, 2, 4] as const,
 } as const;
 
 export interface Tile {
