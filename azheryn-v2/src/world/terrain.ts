@@ -4,6 +4,13 @@ export const GRID = 128;
 export const WATER_LEVEL = 0.2;
 
 // Public contest build: internal world-coordinate/canon contracts are maintained in the private repository.
+// META 1 public minimum: only player-visible/implementation-safe behavior is exposed here.
+export const CONTEST_WORLD_BASELINE = {
+  stablePhase1Geography: true,
+  topDownStrategyView: true,
+  zoomUsesLevelOfDetail: true,
+  fixedStructuresStayWhereBuilt: true,
+} as const;
 
 export interface Tile {
   h: number;
