@@ -1,0 +1,75 @@
+:root {
+  font-family: system-ui, sans-serif;
+  color: #1f2937;
+  background: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.world {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: #c4d2c8;
+}
+
+.world-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.world-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(31, 41, 55, 0.62);
+  color: #f1f5f0;
+  font-size: 13px;
+  pointer-events: none;
+}
+
+
+.world-compass {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 74px;
+  height: 74px;
+  border: 1px solid rgba(245, 238, 214, 0.72);
+  border-radius: 50%;
+  background: rgba(31, 42, 32, 0.62);
+  color: #f5eed6;
+  font: 700 13px/1 system-ui, sans-serif;
+  pointer-events: none;
+  user-select: none;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+.world-compass span { position: absolute; transform: translate(-50%, -50%); }
+.world-compass .north { left: 50%; top: 13%; }
+.world-compass .south { left: 50%; top: 87%; }
+.world-compass .west { left: 13%; top: 50%; }
+.world-compass .east { left: 87%; top: 50%; }
+.world-compass::before,
+.world-compass::after {
+  content: "";
+  position: absolute;
+  background: rgba(245, 238, 214, 0.48);
+}
+.world-compass::before { left: 50%; top: 22%; width: 1px; height: 56%; }
+.world-compass::after { top: 50%; left: 22%; height: 1px; width: 56%; }

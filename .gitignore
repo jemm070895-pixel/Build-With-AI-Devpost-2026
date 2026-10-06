@@ -1,0 +1,8 @@
+devpost/learner-profile.md
+.env
+.env.*
+!.env.example
+
+# Keep the canonical Learn Skill Pack in .agents/skills only.
+/.claude/skills/
+/agent/skills/
