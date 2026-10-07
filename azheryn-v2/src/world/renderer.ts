@@ -3,8 +3,10 @@ import { WATER_LEVEL, type World } from "./terrain";
 
 type RGB = [number, number, number];
 
-export const TILE_W = 40;
-export const TILE_H = 20;
+// G1 overview projection: keep the geographic map visually close to a rectangular sheet.
+// The former 40:20 ratio exaggerated the isometric diamond and made N/S appear diagonal.
+export const TILE_W = 28;
+export const TILE_H = 26;
 // Resolución del dibujo "horneado" para la vista general.
 export const BAKE_SCALE = 1.25;
 // A partir de este zoom se vuelve a dibujar la zona visible en vectores (siempre nítida).
