@@ -36,13 +36,9 @@ The river varies in width and depth and includes shallow/narrow crossings. Terra
 
 ## Development metas
 - META 1 — Mundo y geografía: CLOSED for first-pass G1 after build and human visual review.
-- META 1.1 — Terreno base: APPROVED/CLOSED.
-- META 1.2 — Río y agua geográfica: NEXT.
-- META 1.3 — Cámara y visualización.
-- META 1.4 — Apariencia natural del terreno.
-- META 1.5 — Bosque estructural.
-- META 1.6 — Integración y prueba.
-- Flora and Fauna remain later separate metas.
+- META 2 — Tiempo y clima: CLOSED.
+- META 3 — next first-pass development block.
+- Further terrain, water, forest, camera and distance-dependent graphics polish is deferred until Chapter 1 works end-to-end.
 
 ## Visual target
 Development target G1: readable, attractive, rustic/isometric strategy presentation with coherent scale and acceptable performance. After Chapter 1 works end-to-end, polish toward G2 or better if time permits.
