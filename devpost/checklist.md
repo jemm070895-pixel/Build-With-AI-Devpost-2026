@@ -18,22 +18,10 @@ Build mode: learn
 
 ## V2 build metas
 - [x] META 0 — Base técnica V2.
-- [x] META 1.1 — Terreno base. Approved commit: `fbc7ea3b941d259db81cfa266306b1be1b037a71`.
-- [ ] META 1.2 — Río y agua geográfica.
-  - permanent river
-  - variable width/depth
-  - walkable shallow/narrow crossings
-  - banks
-  - wet areas/minor watercourses where appropriate
-  - build/run check
-  - visual check
-  - user mini-gate approval
-- [ ] META 1.3 — Cámara y visualización.
-- [ ] META 1.4 — Apariencia natural del terreno.
-- [ ] META 1.5 — Bosque estructural.
-- [ ] META 1.6 — Integración y prueba.
-- [ ] Later separate Flora work.
-- [ ] Later separate Fauna work.
+- [x] META 1 — Mundo y geografía. First-pass G1 closed after build and human visual review; further visual polish is deferred until Chapter 1 works end-to-end.
+- [x] META 2 — Tiempo y clima.
+- [ ] META 3 — next first-pass development block.
+- [ ] Later metas — first-pass only until Chapter 1 end-to-end.
 
 ## Chapter 1 end-to-end requirements
 - [ ] Mui appears in the playable founding context.
