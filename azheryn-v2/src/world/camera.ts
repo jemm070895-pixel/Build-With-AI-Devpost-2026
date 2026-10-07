@@ -7,8 +7,8 @@ export interface CameraState {
   zoom: number;
 }
 
-// Límite provisional de alejamiento: evita ver el rombo completo del mundo.
-export const MIN_ZOOM = 0.7;
+// G1 overview gate: allow the whole local map to be inspected before detailed play.
+export const MIN_ZOOM = 0.18;
 export const MAX_ZOOM = 8;
 
 // Mantiene el centro de la cámara dentro del rombo del mundo (un poco de margen).
