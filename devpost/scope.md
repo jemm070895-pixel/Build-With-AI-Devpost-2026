@@ -35,7 +35,7 @@ A broad wooded valley with a permanent river and an irregular, roughly central c
 The river varies in width and depth and includes shallow/narrow crossings. Terrain, forest and clearing should look natural rather than geometric.
 
 ## Development metas
-- META 1 — Mundo y geografía: ACTIVE.
+- META 1 — Mundo y geografía: CLOSED for first-pass G1 after build and human visual review.
 - META 1.1 — Terreno base: APPROVED/CLOSED.
 - META 1.2 — Río y agua geográfica: NEXT.
 - META 1.3 — Cámara y visualización.
