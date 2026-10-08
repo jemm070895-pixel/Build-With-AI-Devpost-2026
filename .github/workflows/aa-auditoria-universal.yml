@@ -1,0 +1,56 @@
+name: AA - Auditoria universal segura
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 8 * * *'
+permissions:
+  contents: read
+  issues: write
+jobs:
+  auditoria:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inventario, integridad y estadisticas
+        id: audit
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import csv, pathlib, json, os, hashlib
+          root=pathlib.Path('.')
+          files=[p for p in root.rglob('*') if p.is_file() and '.git' not in p.parts]
+          report={'repo':os.environ.get('GITHUB_REPOSITORY'),'files':len(files),'bytes':sum(p.stat().st_size for p in files),'extensions':{},'problems':[]}
+          for p in files:
+              report['extensions'][p.suffix or '(none)']=report['extensions'].get(p.suffix or '(none)',0)+1
+              if p.suffix.lower()=='.csv' and p.stat().st_size < 5_000_000:
+                  try:
+                      with p.open(encoding='utf-8-sig',newline='') as f:
+                          list(csv.reader(f))
+                  except Exception as exc: report['problems'].append(str(p)+': '+str(exc))
+          n1=root/'02_RESEARCH/PROGRAMAS/Generación-3 (Gen-3)/Nivel-1 Abecedario/Nivel-1_Abecedario.csv'
+          n2=root/'02_RESEARCH/PROGRAMAS/Generación-3 (Gen-3)/Nivel-2 Bigramas/Nivel-2_Bigramas.csv'
+          if n1.exists() and n2.exists():
+              with n1.open(encoding='utf-8-sig',newline='') as f: a=list(csv.reader(f))[1:]
+              with n2.open(encoding='utf-8-sig',newline='') as f: b=list(csv.reader(f))[1:]
+              letters=[r[1] for r in a if len(r)>1]
+              report['gen3']={'letters':len(letters),'bigrams':len(b),'expected':len(letters)**2}
+              if len(letters)!=len(a) or len(set(letters))!=len(letters): report['problems'].append('N1: letras invalidas o duplicadas')
+              if len(b)!=len(letters)**2: report['problems'].append('N2: cantidad incorrecta')
+              if b and (b[0][0]!=str(len(letters)+1) or b[-1][0]!=str(len(letters)+len(b))): report['problems'].append('N2: numeracion incorrecta')
+          pathlib.Path('aa-auditoria.json').write_text(json.dumps(report,ensure_ascii=False,indent=2),encoding='utf-8')
+          with open(os.environ['GITHUB_STEP_SUMMARY'],'a') as f: f.write('## Auditoria AA\n\n'+json.dumps(report,ensure_ascii=False,indent=2))
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f: f.write('problems='+str(len(report['problems']))+'\n')
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: aa-auditoria
+          path: aa-auditoria.json
+          retention-days: 30
+      - name: Solicitar revision humana ante fallos
+        if: steps.audit.outputs.problems != '0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create --title "AA: auditoria requiere revision" --body "La auditoria detecto problemas. Revise el artefacto y autorice cualquier cambio antes de ejecutarlo. Ejecucion: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" || true
