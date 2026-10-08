@@ -1,0 +1,78 @@
+name: LEC - Laboratorio en copia
+on:
+  schedule:
+    - cron: '43 11 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  laboratorio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Respaldo previo y rama aislada
+        shell: bash
+        run: |
+          set -euo pipefail
+          day="$(date -u +%Y%m%d)"
+          base="$(git rev-parse HEAD)"
+          backup="lec/respaldo-$day"
+          work="lec/laboratorio-$day"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if ! git ls-remote --exit-code --heads origin "$backup" >/dev/null 2>&1; then
+            git branch "$backup" "$base"
+            git push origin "$backup"
+          fi
+          git checkout -B "$work" "$base"
+          echo "LEC_WORK=$work" >> "$GITHUB_ENV"
+          echo "LEC_BASE=$base" >> "$GITHUB_ENV"
+      - name: Analizar pendientes sin alterar fuentes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from datetime import datetime, timezone
+          import re
+          root=Path('.')
+          ignore={'.git','node_modules','.venv','venv','__pycache__','90_AA_REVISION'}
+          marks=re.compile(r'\b(TODO|FIXME|PENDIENTE|POR HACER|NEXT STEP|SIGUIENTE PASO)\b',re.I)
+          extensions={'.md','.txt','.py','.js','.ts','.json','.yml','.yaml'}
+          hits=[]
+          for p in sorted(root.rglob('*')):
+              if not p.is_file() or p.suffix.lower() not in extensions or any(x in ignore for x in p.parts):
+                  continue
+              if p.stat().st_size>200000: continue
+              try: lines=p.read_text(encoding='utf-8').splitlines()
+              except (UnicodeError,OSError): continue
+              for i,line in enumerate(lines,1):
+                  if marks.search(line):
+                      hits.append((str(p),i,line.strip()[:160]))
+                  if len(hits)>=200: break
+              if len(hits)>=200: break
+          day=datetime.now(timezone.utc).strftime('%Y-%m-%d')
+          out=root/'90_AA_REVISION'/'LABORATORIO'
+          out.mkdir(parents=True,exist_ok=True)
+          report=['# LEC — revisión automática de pendientes',f'Fecha UTC: {day}', '',
+            'Estado: inventario exploratorio; NO equivale a investigación científica, desarrollo de software ni validación de hipótesis.',
+            'Seguridad: rama aislada; fuentes intactas; cambios a rama principal requieren autorización explícita.',
+            f'Coincidencias detectadas: {len(hits)}', '',
+            '## Pendientes localizados']
+          report += [f'- `{p}:{i}`: {line}' for p,i,line in hits] or ['- Sin coincidencias de palabras clave.']
+          report += ['', '## Propuestas', '- Revisar cada pendiente con evidencia y falsación antes de aprobar cambios.',
+            '- VERDE: mantener inventario y documentación en esta rama.',
+            '- AMARILLO: cualquier modificación de código, reglas, canon, experimentos o datos necesita autorización.',
+            '- ROJO: resultados negativos o riesgos: registrar y elevar; prohibida la autocorrección.']
+          (out/f'{day}.md').write_text('\n'.join(report)+'\n',encoding='utf-8')
+          PY
+      - name: Publicar solo rama de laboratorio
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add 90_AA_REVISION/LABORATORIO/
+          if ! git diff --cached --quiet; then
+            git commit -m "LEC: inventario exploratorio de pendientes"
+          fi
+          git push --force-with-lease origin "HEAD:refs/heads/$LEC_WORK"
