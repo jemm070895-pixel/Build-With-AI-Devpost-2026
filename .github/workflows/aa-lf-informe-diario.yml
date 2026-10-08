@@ -1,0 +1,45 @@
+name: AA LF - Auditoria documental
+on:
+  schedule:
+    - cron: '17 10 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  documentar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Crear informe sin modificar fuentes
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from datetime import datetime, timezone
+          from collections import Counter
+          root = Path(".")
+          ignored = {".git", "node_modules", ".venv", "venv", "__pycache__", "90_AA_REVISION"}
+          files = [p for p in root.rglob("*") if p.is_file() and not any(x in ignored for x in p.parts)]
+          types = Counter(p.suffix.lower() or "(sin extension)" for p in files)
+          out = root / "90_AA_REVISION" / "AUDITORIAS"
+          out.mkdir(parents=True, exist_ok=True)
+          today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          report = "# Auditoria automatica documental - " + today + "\n\n"
+          report += "Estado: INFORME INFORMATIVO; no aprueba ni modifica codigo, canon, datos o reglas.\n\n"
+          report += f"Archivos visibles: {len(files)}\n\n"
+          report += "## Extensiones mas frecuentes\n"
+          report += "".join(f"- {ext}: {num}\n" for ext, num in types.most_common(15))
+          report += "\n## Revision LF\n- VERDE: solo reporte informativo, sin cambios funcionales.\n- AMARILLO: recomendaciones requieren evaluacion.\n- ROJO: cualquier fallo debe elevarse sin autocorreccion.\n"
+          (out / f"{today}.md").write_text(report, encoding="utf-8")
+          PY
+      - name: Guardar informe
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add 90_AA_REVISION/AUDITORIAS/
+          if ! git diff --cached --quiet; then
+            git commit -m "AA LF: auditoria documental diaria"
+            git pull --rebase
+            git push
+          fi
