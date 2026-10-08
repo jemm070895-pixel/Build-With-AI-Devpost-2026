@@ -1,17 +1,18 @@
-# Solicitud Meta VR Start — campo Additional Information
-Estado: texto recomendado, no enviado todavía.
+# Meta VR Start — Additional Information
+Fecha: 2026-10-07
+ESTADO: borrador autorizado conceptualmente, no enviado.
+Esta es la version vigente para enviar, sustituyendo versiones anteriores.
 
-I'm an independent, self-taught developer building AZHERYN XR, a new immersive VR experience set in my original fantasy universe. My long-term vision is to create a persistent, interactive world where players can explore, interact naturally using their hands, and engage with AI-driven characters and environments. I plan to develop the experience using Unreal Engine 5, beginning with a playable prototype for Meta Quest and expanding its capabilities over time. I use AI-assisted development tools and am seeking Meta VR Start resources and guidance to build and optimize the experience.
+I am an independent, self-taught aspiring developer with an ambitious idea for an immersive virtual reality game.
 
-Nota: herramientas y metas propuestas, no obra completada. El campo es opcional.
+The project has not been developed yet. At this stage, it is only a concept I would like to bring to life.
 
-## VERSION CORREGIDA 2026-10-07 (preferida)
-I'm an independent, self-taught developer preparing to create AZHERYN XR, a new immersive VR experience set in my original fantasy universe.
+My long-term vision is to create a vast, interactive and persistent virtual world inspired by the level of immersion imagined in the movie Ready Player One, but with a completely original game, world, characters, story and identity.
 
-Development of AZHERYN XR has not started yet. The project is currently in the planning and design stage, and it will be developed as a new, independent experience using Unreal Engine 5.
+I envision players exploring, interacting naturally through hand tracking, communicating with intelligent virtual characters, and participating in a living world that evolves over time.
 
-My long-term vision is to build a persistent virtual world where players can explore, interact naturally with their hands, and engage with AI-driven characters and environments.
+I intend to use Unreal Engine 5 and AI-assisted development tools, starting with a small playable experience for Meta Quest and progressively expanding toward this larger vision.
 
-I plan to begin with a playable Meta Quest prototype and progressively expand the experience. I use AI-assisted development tools and hope to benefit from Meta VR Start's resources and guidance.
+I hope Meta VR Start can provide the guidance, resources and support needed to turn this idea into a real virtual reality experience.
 
-Cautela: New Experience examina concepcion y construccion dentro de ventana; conservar fechas reales y no asegurar elegibilidad hasta revision oficial. Texto para solicitud, no enviado.
+Protocolo: no mencionar nombres de proyectos ni saga ni declarar software existente en este texto de solicitud; no falsificar datos si Meta pide de forma explicita historial de proyectos o fecha de concepcion. El juego XR sigue siendo una idea sin codigo.
