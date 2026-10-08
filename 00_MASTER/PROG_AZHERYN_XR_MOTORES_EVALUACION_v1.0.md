@@ -23,3 +23,6 @@ No fijar motor hasta especificaciones GPU/CPU/RAM, pruebas de compilacion XR, FP
 Cualquier XR New Experience sera implementacion nueva; prohibido copiar/portar codigo preexistente V2. Conceptos y mundo de saga si pueden informar especificacion sin contaminar implementacion.
 ## NO CANON
 Las decisiones tecnologicas no modifican saga ni canon del juego, y la presentacion del usuario al concurso queda pendiente.
+
+## DECISION ACTUAL 2026-10-07 — EVITAR DOBLE TRABAJO
+El usuario plantea y se adopta como preferencia de arquitectura: construir AZHERYN XR directamente con Unreal Engine 5 desde la primera version, escalando calidad gradualmente, en lugar de construir Unity y migrar luego. Unreal se selecciona como motor principal PROVISIONAL sujeto a verificacion de hardware real, rendimiento Quest, soporte de hand tracking y compilacion. Unity queda como contingencia, no como etapa obligatoria de migracion. No equivale a promesa de graficos Ready Player One ni GTA 6 en Quest standalone. V2 queda separado e intacto. Pendiente elegir Unreal en formulario VR Start, confirmar especificaciones laptop y hacer prototipo hands-first minimo.
