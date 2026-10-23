@@ -16,12 +16,12 @@ Date: 2026-10-23. Release candidate: G6.31.1.
 
 Technical artifact: [app-map.html](app-map.html). This documents the source paths from the actual local G6.31.1 archive and the gameplay flow. It does not claim the learner has completed a hands-on code tour.
 
-## Learning Wrap-Up — owner input pending
+## Learning Wrap-Up — owner reflection recorded
 
-The official 5-build/6-ship workflow requires a learner-owned reflection or completed alternative activity. The owner should describe, in their own words, what they learned and how the six skills informed decisions. Do not fabricate this response or mark it complete without evidence.
+The owner supplied this reflection in their own words on 2026-10-23: “Me sirvió para avanzar más organizado dando prioridad al orden”. Preserve it verbatim for the learner-owned Devpost answers.
 
 ## Status
 
 Final Review: **owner acceptance recorded; detailed checklist and independent build evidence remain incomplete**.
-Code Tour and App Map: **technical map published; learner learning wrap-up pending**.
+Code Tour and App Map: **technical map published; learner reflection recorded**.
 6-ship: **not complete**.
