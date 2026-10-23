@@ -56,3 +56,21 @@ Do not silently expand Chapter 1 beyond the public contest requirements above.
 
 ## Historical evidence
 Earlier prototype history is retained privately.
+
+## Shipping audit — 2026-10-23 (G6.31.1)
+- [x] Owner confirms playable G6.31.1 works on Windows laptop.
+- [x] Six Devpost Learn Skill Pack folders present in `.agents/skills/`.
+- [x] Scope, PRD, spec and existing checklist present.
+- [x] Public GitHub repository exists; standalone MIT utility modules published.
+- [ ] Complete 5-build **Final Review** and **Code Tour and App Map** evidence. Do not mark 6-ship complete before these are documented.
+- [ ] Check learner-profile.md for private data before public release; inspect git history and intended files for secrets.
+- [ ] Sync audited contest game source; public repository currently does not reflect complete G6.31.1.
+- [ ] Publicly accessible short video demonstrating real gameplay. A deployment does not replace the video.
+- [ ] Ensure public repository URL is entered in Devpost's **Try it out** field.
+- [ ] Learner personally writes submission name, description and answers; AI-generated draft is **not** a substitute under the 6-ship skill.
+- [ ] Answer the required question on how the Devpost Learn Skill Pack was used, in learner's own words.
+- [ ] Complete required exit survey and age-of-majority checkbox if shown in the submission form.
+- [ ] Check the live Devpost form for exact fields and video constraints; do not assume 1–3 minutes is an official maximum.
+- [ ] Submit before **2026-10-26 5:00 PM ET / 2:00 PM Arizona (MST)**.
+
+Peer feedback, Discord posts and live deployment are **optional** per the installed 6-ship skill; no peer-review quota is required.
