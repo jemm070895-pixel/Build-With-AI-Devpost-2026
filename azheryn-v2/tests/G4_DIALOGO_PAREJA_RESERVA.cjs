@@ -1,0 +1,4 @@
+const test=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');const path=require('node:path');
+const src=fs.readFileSync(path.join(__dirname,'../src/ui/WorldView.tsx'),'utf8');
+test('paired dialogue reserves both participants, preventing unrelated speech in active slot',()=>{assert.match(src,/const pairedSlot=partner!==undefined && conversationTurn/);assert.match(src,/const utterance=pairedSlot \? contextualExchange : ambientLine/);});
+test('paired conversation is deterministic and only assigned speaker speaks',async()=>{const m=await import('../src/world/socialLife.ts');for(let t=0;t<1500;t+=13){const a=m.pairedConversationUtterance('guard1','guard2',t,'es',false,'guard1');const b=m.pairedConversationUtterance('guard1','guard2',t,'es',false,'guard2');assert.ok(!(a&&b));if(m.conversationTurn('guard1','guard2',t))assert.ok(Boolean(a)!==Boolean(b));else assert.equal(a,null);}});

@@ -1,0 +1,1 @@
+Correcciones: el estado social no veta la recogida automática; las parejas con orden persistente reanudan después del descanso; se permite ordenar directamente a un personaje descansando. Capacidad 264. Falta prueba Windows.

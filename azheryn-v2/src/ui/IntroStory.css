@@ -1,0 +1,58 @@
+.azh-intro{min-height:100dvh;background:#091724;color:#f7ecd5;display:flex;flex-direction:column;align-items:center;padding:clamp(12px,3vw,30px);gap:12px;box-sizing:border-box;font-family:Georgia,serif}.azh-intro-top,.azh-intro-actions{width:min(900px,100%);display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap}.azh-intro-top{font-size:clamp(17px,3vw,27px);letter-spacing:2px}.azh-intro button{background:#22394b;color:#fff2d3;border:1px solid #bd9c63;border-radius:8px;padding:12px 16px;cursor:pointer;font-size:15px;min-height:44px}.azh-intro button:disabled{opacity:.35;cursor:default}.azh-intro-art{width:min(900px,100%);height:min(48dvh,460px);border:2px solid #ad8751;background:#101b24;overflow:hidden;border-radius:12px;display:grid;place-items:center}.azh-intro-art img{width:100%;height:100%;object-fit:contain}.azh-intro-dialog{width:min(900px,100%);min-height:110px;box-sizing:border-box;background:#132637;border:1px solid #987849;border-radius:10px;padding:16px 20px}.azh-intro-dialog small{color:#e7bd78;font-weight:bold}.azh-intro-dialog p{font-size:clamp(16px,2.1vw,22px);line-height:1.45;margin:9px 0 0}.azh-intro-actions{justify-content:flex-end}.azh-intro-actions button:first-child{margin-right:auto}@media(max-width:600px){.azh-intro-art{height:35dvh}.azh-intro-actions{gap:6px}.azh-intro-actions button{padding:9px;font-size:13px}.azh-intro-dialog{min-height:125px}}
+.azh-intro-progress{font-variant-numeric:tabular-nums;color:#e7bd78;min-width:48px;text-align:center}
+.azh-intro button:focus-visible{outline:3px solid #f4d79d;outline-offset:3px}
+@media(max-height:540px) and (orientation:landscape){.azh-intro{padding:6px 12px;gap:5px}.azh-intro-top{font-size:15px}.azh-intro-art{height:38dvh}.azh-intro-dialog{min-height:0;padding:7px 12px}.azh-intro-dialog p{font-size:14px;line-height:1.25;margin:3px 0}.azh-intro button{min-height:36px;padding:5px 9px;font-size:12px}.azh-intro-actions{gap:5px}}
+@media(max-width:400px){.azh-intro-actions{justify-content:space-between}.azh-intro-actions button:first-child{margin-right:0}.azh-intro-art{height:32dvh}}
+
+.azh-intro-image-fallback{padding:24px;text-align:center;color:#e7bd78;font-size:clamp(15px,2vw,20px)}
+
+/* G4: camera-like motion on the original approved stills; no generated replacements. */
+.azh-intro-settings{display:flex;gap:8px;align-items:center}
+.azh-intro-cinematic img{animation:azh-g4-camera var(--azh-scene-duration, 9s) ease-in-out both;transform-origin:50% 45%;will-change:transform}
+@keyframes azh-g4-camera{from{transform:scale(1)}to{transform:scale(1.065)}}
+@media(prefers-reduced-motion:reduce){.azh-intro-cinematic img{animation:none}}
+@media(max-width:400px){.azh-intro-settings button{padding:8px;font-size:12px}}
+
+/* G4: cinematic letterboxing and image contrast without changing approved art. */
+.azh-intro-art{position:relative;box-shadow:0 14px 45px rgba(0,0,0,.38),inset 0 0 0 1px rgba(244,215,157,.15)}
+.azh-intro-art::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 42px rgba(5,13,20,.34)}
+.azh-intro-art img{filter:contrast(1.045) saturate(1.055)}
+@media(prefers-reduced-motion:reduce){.azh-intro-art img{filter:none}}
+
+/* G4 cinematic playback controls remain usable on small displays. */
+.azh-intro-settings{flex-wrap:wrap;justify-content:flex-end}.azh-intro-top{row-gap:8px}
+@media(max-width:600px){.azh-intro-top{letter-spacing:.5px}.azh-intro-settings{gap:4px}.azh-intro-settings button{min-height:40px;padding:7px 9px;font-size:12px}}
+
+/* G4 fourth pass: safe cinematic timing and touch accessibility. */
+.azh-intro-settings button{touch-action:manipulation}
+.azh-intro-art img{backface-visibility:hidden}
+@media(prefers-reduced-motion:reduce){.azh-intro-cinematic img{animation:none!important}}
+
+/* G4 fifth pass: do not animate stills while playback is paused or the page is hidden. */
+.azh-intro-art img{max-width:100%;max-height:100%}
+@media(prefers-reduced-motion:reduce){.azh-intro-art img{will-change:auto;transform:none!important}}
+
+/* Closing pass: artwork dominates the prologue; captions are overlaid on the image. */
+.azh-intro{position:relative;justify-content:center;gap:8px;background:#08141a}
+.azh-intro-art{width:min(1100px,100%);height:min(72dvh,720px);border-radius:12px;object-fit:cover}
+.azh-intro-art img{object-fit:cover}
+.azh-intro-dialog{position:relative;margin-top:-145px;z-index:2;width:min(1000px,calc(100% - 24px));min-height:100px;background:linear-gradient(0deg,rgba(5,15,22,.97),rgba(5,15,22,.83));border:1px solid rgba(220,183,114,.45);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.azh-intro-actions{position:relative;z-index:3}
+@media(max-width:600px){.azh-intro-art{height:62dvh}.azh-intro-dialog{margin-top:-115px;min-height:100px;padding:10px 14px}.azh-intro-dialog p{font-size:15px}}
+
+/* G5 cinematic opening */
+.azh-splash{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:12px;color:#f8e9c5;background:radial-gradient(ellipse at 50% 55%,#24463d 0%,#0d2225 43%,#050d14 100%);font-family:Georgia,serif;text-align:center}.azh-splash-emblem{font-size:clamp(75px,14vw,160px);color:#d8aa57;text-shadow:0 0 30px #9c7b3c}.azh-splash h1{font-size:clamp(45px,9vw,112px);letter-spacing:.13em;margin:0;text-shadow:0 5px 28px #000}.azh-splash h1 span{font-size:.35em;letter-spacing:.05em}.azh-splash p{letter-spacing:.3em;font-size:clamp(11px,2vw,16px)}.azh-splash-loader{width:min(300px,65vw);height:4px;border-radius:8px;background:#38463e;overflow:hidden}.azh-splash-loader span{display:block;width:100%;height:100%;background:#d8aa57;transform-origin:left;animation:azh-load 3.2s linear forwards}@keyframes azh-load{from{transform:scaleX(0)}to{transform:scaleX(1)}}.azh-splash button{background:transparent;border:1px solid #a98952;border-radius:24px;color:#f6e7c9;padding:9px 25px;margin-top:15px;cursor:pointer}.azh-intro-art{height:min(79dvh,850px)}.azh-intro-dialog{border:0;border-radius:0 0 12px 12px;background:linear-gradient(0deg,rgba(4,12,15,.97),rgba(4,12,15,.65) 80%,transparent);box-shadow:none}.azh-intro-top{font-size:clamp(14px,2vw,20px)}
+
+/* G6.19: approved prologue illustrations must be visible in full, never zoomed/cropped. */
+.azh-intro-art img, .azh-intro-cinematic img { object-fit:contain !important; object-position:center center; transform:none !important; animation:none !important; width:100%; height:100%; }
+.azh-intro-art { background:#08141a; }
+.azh-intro-art::after { box-shadow:none; }
+@media (max-width:600px) { .azh-intro-art { height:min(64dvh,560px); } }
+
+/* G6.21: language is chosen before the opening cinematic, never silently switched. */
+.azh-language-gate{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:22px;padding:24px;background:radial-gradient(ellipse,#214139,#08141a);color:#f6e9cf;text-align:center;font-family:Georgia,serif;box-sizing:border-box}
+.azh-language-gate h1{font-size:clamp(38px,8vw,86px);margin:0;letter-spacing:.08em}
+.azh-language-gate p{font-size:clamp(16px,2.5vw,23px);max-width:600px}
+.azh-language-gate>div{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
+.azh-language-gate button{font:inherit;font-size:22px;color:#fff2d3;background:#22394b;border:2px solid #bd9c63;border-radius:12px;padding:17px 36px;cursor:pointer;min-width:165px}
+.azh-language-gate button:focus-visible{outline:3px solid white;outline-offset:4px}

@@ -1,0 +1,11 @@
+AZHERYN V2 G3 - COMPROBACION EN WINDOWS
+
+1. Extrae el ZIP completo.
+2. Abre la carpeta azheryn-v2.
+3. Haz doble clic en VALIDAR_Y_JUGAR_G3.bat.
+4. Espera las pruebas y compilacion; el juego se abre en el navegador.
+5. Comprueba: seleccionar guardias, talar, colocar acopio, transportar, colocar almacen y llegar a 91/91.
+6. Comprueba rios, peces, fauna, clima, pausa y guardado.
+7. Si falla, enviame VALIDACION_G3_RESULTADOS.txt.
+
+NO SE HA CONFIRMADO TODAVIA UNA PARTIDA COMPLETA EN WINDOWS.

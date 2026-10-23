@@ -1,0 +1,4 @@
+const {test}=require('node:test');const assert=require('node:assert/strict');const fs=require('node:fs');
+const social=fs.readFileSync('src/world/socialLife.ts','utf8');const view=fs.readFileSync('src/ui/WorldView.tsx','utf8');
+test('group climate drives a localized dialogue tone without automatic refusal',()=>{assert.match(social,/export function groupDialogueTone/);assert.match(social,/export function groupDialogueLine/);assert.match(view,/groupDialogueTone\(\[ch,\.\.\.nearby\]/);assert.match(view,/contextualExchange/);assert.doesNotMatch(social.slice(social.indexOf('export function groupDialogueTone')),/refuseOrder\(|ch\.order\s*=/);});
+test('ancestral vocabulary is not translated by collective dialogue',()=>{assert.match(social,/language==='es'/);assert.doesNotMatch(social.slice(social.indexOf('export function groupDialogueTone')),/Fehe.*means|Mui.*means/);});

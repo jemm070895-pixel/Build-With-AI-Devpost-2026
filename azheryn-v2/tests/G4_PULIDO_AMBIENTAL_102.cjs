@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const src=fs.readFileSync('src/ui/WorldView.tsx','utf8');
+assert.match(src,/foliage microdetail: zoom-gated leaf\/needle facets/);
+assert.match(src,/if\(z >= 0\.78\)/);
+assert.match(src,/if \(log\.usedForStorehouse\) continue;/);
+assert.match(src,/if\(z>=\.75\)/);
+assert.match(src,/Two flame layers, ember glow and intermittent sparks/);
+assert.match(src,/if\(isNight\(climateClock\.snapshot\(\)\.hour\)\)/);
+console.log('OK: foliage LOD, logs, campfire night visuals');

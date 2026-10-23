@@ -440,7 +440,8 @@ export function createWorld(seed = 7): World {
         smoothstep(0, 3, sd) *
         smoothstep(22, 11, sd) *
         (1 - 0.7 * smoothstep(0.62, 0.8, fbm(x * 0.13 + 90, y * 0.13, seed + 43)));
-      forest = Math.max(forest, ring * 0.95);
+      forest = Math.max(forest, ring * 0.72);
+      forest = Math.max(forest, 0.72 * smoothstep(0.31, 0.62, fbm(wx * 0.035 + 31, wy * 0.035 - 17, seed + 83)));
       forest += ridge * 0.5 * (1 - rock);
       const glade = gladeAt(x, y);
       forest *= 1 - glade;

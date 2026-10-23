@@ -1,0 +1,12 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const src = fs.readFileSync('src/ui/WorldView.tsx', 'utf8');
+assert.match(src, /stockpile,storehouse,campfire,haul,haulOrigin,foodPatches/);
+assert.match(src, /window\.addEventListener\("pagehide", onPageHide\)/);
+assert.match(src, /document\.addEventListener\("visibilitychange", onVisibilityChange\)/);
+assert.match(src, /window\.removeEventListener\("pagehide", onPageHide\)/);
+assert.match(src, /document\.removeEventListener\("visibilitychange", onVisibilityChange\)/);
+assert.match(src, /new Set\(restoredHaul\.workerIds\)\.size === 2/);
+assert.match(src, /haul = restoredHaul/);
+assert.match(src, /haul = null/);
+console.log('OK: transport save, recovery, lifecycle cleanup');

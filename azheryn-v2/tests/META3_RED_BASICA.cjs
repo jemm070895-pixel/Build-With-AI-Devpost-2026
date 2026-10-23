@@ -1,0 +1,10 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs'); const path = require('node:path');
+const ui=fs.readFileSync(path.join(__dirname,'../src/ui/WorldView.tsx'),'utf8');
+assert.match(ui,/navigator\.onLine/);
+assert.match(ui,/addEventListener\("online"/);
+assert.match(ui,/addEventListener\("offline"/);
+assert.match(ui,/removeEventListener\("online"/);
+assert.match(ui,/removeEventListener\("offline"/);
+assert.match(ui,/Sin conexión/);
+console.log('RED BASICA: 6 comprobaciones estáticas correctas');

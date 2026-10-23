@@ -1,0 +1,11 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const css = fs.readFileSync('src/index.css', 'utf8');
+const html = fs.readFileSync('index.html', 'utf8');
+assert.match(css, /@media \(max-height: 520px\)/);
+assert.match(css, /@media \(max-height: 360px\)/);
+assert.match(css, /\.strategy-bottom \{[^}]*overflow-x: auto/);
+assert.match(css, /\.strategy-squad \{[^}]*max-height: 37dvh/);
+assert.match(css, /\.g3-guide \{[^}]*max-height: 37dvh/);
+assert.match(html, /viewport-fit=cover/);
+console.log('G3 compact-height responsive checks OK');

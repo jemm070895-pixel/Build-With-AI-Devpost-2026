@@ -1,0 +1,118 @@
+{
+  "schema": "azheryn-module-network-v1",
+  "branches": {
+    "foundation": [
+      "foundation/meta0.ts"
+    ],
+    "world": [
+      "world/camera.ts",
+      "world/climate.ts",
+      "world/materialPlanner.ts",
+      "world/noise.ts",
+      "world/peacefulWildlife.ts",
+      "world/renderer.ts",
+      "world/saveRecovery.ts",
+      "world/saveSlots.ts",
+      "world/saveTransfer.ts",
+      "world/socialLife.ts",
+      "world/storehouse.ts",
+      "world/terrain.ts",
+      "world/treeFruits.ts",
+      "world/treeSpecies.ts",
+      "world/work.ts"
+    ],
+    "ui": [
+      "ui/IntroStory.tsx",
+      "ui/WorldView.tsx"
+    ],
+    "lab": [
+      "lab/experiment.ts"
+    ],
+    "app": [
+      "App.tsx",
+      "main.tsx"
+    ]
+  },
+  "modules": 21,
+  "connections": 25,
+  "crossBranchConnections": [
+    {
+      "from": "App.tsx",
+      "to": "ui/WorldView.tsx"
+    },
+    {
+      "from": "App.tsx",
+      "to": "ui/IntroStory.tsx"
+    },
+    {
+      "from": "main.tsx",
+      "to": "App.tsx"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/socialLife.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/saveTransfer.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/saveSlots.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/saveRecovery.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/materialPlanner.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/peacefulWildlife.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/treeSpecies.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/treeFruits.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/storehouse.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/camera.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/noise.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/renderer.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/terrain.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/climate.ts"
+    },
+    {
+      "from": "ui/WorldView.tsx",
+      "to": "world/work.ts"
+    }
+  ],
+  "unresolved": [],
+  "cycles": [],
+  "orphanModules": [
+    "foundation/meta0.ts",
+    "lab/experiment.ts"
+  ]
+}

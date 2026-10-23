@@ -1,0 +1,17 @@
+AZHERYN V2 - G3 - ESTADO VERIFICADO
+
+118/118 pruebas automatizadas: CORRECTAS con Node 22 y --experimental-strip-types (ver G3_VERIFICACION_2026-10-22_CONTINUACION.md).
+Compilacion TypeScript/Vite: NO VERIFICADA. Al ejecutarla aqui faltan paquetes react, react-dom y vite.
+Pruebas en laptop, telefono y tableta: PENDIENTES.
+Partida completa 91/91: PENDIENTE.
+
+EN LAPTOP WINDOWS
+1. Extraer el ZIP completo en una carpeta normal.
+2. Doble clic VALIDAR_Y_ABRIR_TRES_PLATAFORMAS.bat.
+3. Si falla, enviar RESULTADO_COMPROBACION_G3.txt.
+4. Si abre, probar seleccion, movimiento, tala, transporte, guardado y almacen.
+5. Conectar telefono y tableta al mismo Wi-Fi privado y abrir la IP mostrada.
+6. Verificar tactil, giro, menus, pausa y guardado.
+7. Registrar problemas y si se completo el almacen 91/91.
+
+No declarar G3 terminado antes de esas verificaciones.

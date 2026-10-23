@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const src=fs.readFileSync(path.join(__dirname,'../src/ui/WorldView.tsx'),'utf8');
+assert(src.includes('pendingLoggingZone?: {x:number;y:number}'), 'Pending zone must be part of character state');
+assert(src.includes('writeChapterSave(localStorage, SAVE_KEY, {version:1,characters,'), 'Saving must serialize characters');
+assert(src.includes('characters=saved.characters'), 'Loading must restore characters');
+const resumeMatches=src.match(/if\(ch\.pendingLoggingZone && !ch\.order\)/g)||[];
+assert(resumeMatches.length>=2,'Both rest and survival must resume pending orders');
+const handler=src.slice(src.indexOf('const onLogOrder='),src.indexOf('window.addEventListener("azheryn-log-order"'));
+assert(handler.includes('ch.pendingLoggingZone={x:p.x,y:p.y}'), 'Latest queued zone replaces older one');
+assert(handler.includes('ch.pendingLoggingZone=undefined'), 'Immediate orders clear outdated queue');
+console.log('PASS: pending zone saved, restored and resumed after needs/rest');

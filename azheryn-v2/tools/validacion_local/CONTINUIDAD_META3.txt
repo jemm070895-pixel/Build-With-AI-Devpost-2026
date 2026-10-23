@@ -1,0 +1,13 @@
+AZHERYN V2 — META 3 — PROYECTO UNICO
+Fecha: 2026-10-21
+Proyecto fuente: ACADEMIA-AZHERIN-PRIVATE/azheryn-v2
+
+Trabajo integrado: comunicacion NPC, prioridad de transporte, transporte por fases, cancelacion conjunta por fatiga y pausa efectiva.
+Correccion actual: la pausa congela el dt de simulacion y evita iniciar o completar transportes durante pausa.
+
+Validacion offline: 32 generales + 8 coordinacion + 8 cancelacion + 10 pausa = 58 comprobaciones superadas.
+LIMITACION: no sustituye compilacion completa npm run build ni prueba visual en laptop.
+Al alcanzar META 4: ejecutar compilacion y prueba visual del proyecto consolidado en laptop.
+No crear copias paralelas. Mantener un ZIP unico de continuidad.
+
+2026-10-21 — META 3, acopio prioritario: al terminar un arbol, si hay troncos sin almacenar y existe acopio, el trabajador no reserva otro arbol automaticamente. Queda disponible para transportar; las ordenes directas existentes se respetan hasta terminar el arbol actual. Se informa al jugador. PRUEBAS_ACOPIO_META3.cjs: 6 verificaciones estaticas. Pendiente: compilacion completa y prueba visual en META 4.

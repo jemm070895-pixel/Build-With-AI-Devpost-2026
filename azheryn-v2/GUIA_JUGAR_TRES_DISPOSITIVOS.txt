@@ -1,0 +1,22 @@
+AZHERYN V2 - GUIA RAPIDA DE 3 DISPOSITIVOS
+
+LAPTOP WINDOWS
+1. Extrae TODO el ZIP.
+2. En la carpeta azheryn-v2, doble clic en JUGAR_EN_LAPTOP_TABLET_TELEFONO.bat.
+3. Abre http://localhost:5173 en la laptop.
+
+TELEFONO / TABLETA
+1. Conecta el dispositivo al mismo Wi-Fi PRIVADO que la laptop.
+2. Deja el archivo .bat abierto.
+3. En la ventana de Windows busca Network: http://192.168.x.x:5173/ (ejemplo, no copiar literalmente).
+4. Escribe la direccion Network exacta en Safari, Chrome u otro navegador moderno.
+5. En Windows, si hay aviso de cortafuegos, autoriza solo redes privadas de confianza.
+6. No se requiere instalar una aplicacion. No es un APK ni una app de App Store.
+
+IMPORTANTE
+- La laptop debe permanecer encendida con el servidor abierto.
+- El juego NO queda disponible desde Internet publico mediante este metodo.
+- No uses redes Wi-Fi publicas ni abras puertos del router.
+- Cada navegador conserva su propio guardado. Usa Exportar/Importar partida para cambiar de equipo.
+- La compilacion y la jugabilidad real aun deben comprobarse.
+- Si no abre en movil: comprueba misma red, direccion Network y cortafuegos privado.

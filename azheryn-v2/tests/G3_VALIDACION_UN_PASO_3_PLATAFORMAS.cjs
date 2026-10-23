@@ -1,0 +1,15 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const root=path.resolve(__dirname,'..');
+const batch=fs.readFileSync(path.join(root,'VALIDAR_Y_ABRIR_TRES_PLATAFORMAS.bat'),'utf8');
+const validation=fs.readFileSync(path.join(root,'COMPROBAR_G3_SIN_ABRIR_JUEGO.bat'),'utf8');
+const launch=fs.readFileSync(path.join(root,'JUGAR_EN_LAPTOP_TABLET_TELEFONO.bat'),'utf8');
+assert.match(batch,/call.*COMPROBAR_G3_SIN_ABRIR_JUEGO\.bat/i);
+assert.match(batch,/if errorlevel 1\s*\(/i);
+assert.match(batch,/call.*JUGAR_EN_LAPTOP_TABLET_TELEFONO\.bat/i);
+assert.ok(batch.indexOf('COMPROBAR_G3_SIN_ABRIR_JUEGO.bat')<batch.indexOf('JUGAR_EN_LAPTOP_TABLET_TELEFONO.bat'));
+assert.match(validation,/npm run build/i);
+assert.match(launch,/npm run preview -- --host 0\.0\.0\.0 --port 5173 --strictPort/i);
+assert.match(launch,/partidas se guardan por navegador\/dispositivo/i);
+console.log('OK: valida antes de iniciar y conserva uso local de tres plataformas');

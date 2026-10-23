@@ -1,0 +1,14 @@
+const assert=require('node:assert/strict');
+const {writeChapterSave,readChapterSave,BACKUP_SUFFIX}=require('../src/world/saveSlots.ts');
+const map=new Map();
+const storage={getItem:k=>map.get(k)??null,setItem:(k,v)=>map.set(k,v)};
+const make=(n)=>({version:1,characters:Array.from({length:8},(_,i)=>({id:i?'guard-'+i:'mui',mui:i===0,x:n,y:0,tx:n,ty:0})),felledLogs:[],workTrees:[]});
+assert.equal(writeChapterSave(storage,'save',make(1)),true);
+assert.equal(writeChapterSave(storage,'save',make(2)),true);
+assert.equal(readChapterSave(storage.getItem('save'),null).saved.characters[0].x,2);
+assert.equal(readChapterSave(storage.getItem('save'+BACKUP_SUFFIX),null).saved.characters[0].x,1);
+assert.equal(writeChapterSave(storage,'save',{version:1,characters:[]}),false);
+assert.equal(readChapterSave(storage.getItem('save'),null).saved.characters[0].x,2);
+const broken={...storage,setItem:(k,v)=>{throw new Error('quota')}};
+assert.equal(writeChapterSave(broken,'save',make(3)),false);
+console.log('OK G3 guardado validado, respaldo y fallo de almacenamiento');

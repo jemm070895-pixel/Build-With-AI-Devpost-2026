@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const src=fs.readFileSync(path.join(__dirname,'../src/ui/WorldView.tsx'),'utf8');
+assert.match(src,/A guard must physically reach the building site/);
+assert.match(src,/ch\.tx=storehouse\.x;ch\.ty=storehouse\.y/);
+assert.match(src,/!ch\.needTrip && !ch\.order/);
+assert.match(src,/Math\.hypot\(ch\.x-storehouse!\.x,ch\.y-storehouse!\.y\)<=8/);
+assert.match(src,/!haul\?\.workerIds\.includes\(ch\.id\)/);
+console.log('OK: construction requires nearby available guards, preserving haul/survival priority');

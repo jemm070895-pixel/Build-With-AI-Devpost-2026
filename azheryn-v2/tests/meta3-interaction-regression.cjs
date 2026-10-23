@@ -1,0 +1,11 @@
+const fs=require('node:fs'); const assert=require('node:assert/strict');
+const s=fs.readFileSync(require('node:path').join(__dirname,'../src/ui/WorldView.tsx'),'utf8');
+const fn=s.slice(s.indexOf('const onPointerDown ='),s.indexOf('const onPointerMove ='));
+assert.ok(fn.indexOf('if(stockpileModeRef.current)')>=0);
+assert.ok(fn.indexOf('if(stockpileModeRef.current)')<fn.indexOf('if(hit && orderModeRef.current !== "logging")'),'Acopio debe preceder seleccion');
+assert.ok(fn.indexOf('if(hit && orderModeRef.current !== "logging")')<fn.indexOf('const hitTree='),'La tala activa debe evitar seleccion accidental de personajes');
+assert.equal((fn.match(/if\(stockpileModeRef.current\)/g)||[]).length,1);
+assert.ok(fn.includes('ch.loggingZone=undefined;ch.knowledge=undefined;'),'Movimiento limpia conocimiento');
+assert.ok(s.includes('ch.previousOrder=undefined;ch.pendingLoggingZone=undefined;ch.knowledge=undefined;') && s.includes('ch.loggingZone={x:p.x,y:p.y}'),'Tala limpia conocimiento');
+assert.ok(s.includes('if(ch.previousOrder && !ch.order)'),'Descanso no sobrescribe orden activa');
+console.log('META3: 6/6 regresiones de interacción correctas');

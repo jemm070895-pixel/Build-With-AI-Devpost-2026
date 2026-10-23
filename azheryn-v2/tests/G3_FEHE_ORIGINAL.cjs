@@ -1,0 +1,1 @@
+const fs=require("fs");const assert=require("assert");const p="public/intro/";assert(fs.existsSync(p+"Fehe_original.jpeg"));assert(fs.existsSync(p+"entrega_fehe_original.webp"));const src=fs.readFileSync("src/ui/IntroStory.tsx","utf8");assert(src.includes("entrega_fehe_original"));assert(src.includes("Fehe_original"));console.log("Fehe original integrada: OK");

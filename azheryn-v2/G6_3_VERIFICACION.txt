@@ -1,0 +1,11 @@
+AZHERYN V2 G6.3 — PULIDO VISUAL
+Fecha: 2026-10-23
+Origen: G6.2 COPAS RIO
+Cambios: detalles de luz en coníferas, grupos de hojas en árboles anchos, grietas en rocas, juncos en orillas.
+Archivo modificado: src/world/renderer.ts
+Sin cambios deliberados en simulación, recursos, lógica de construcción o guardado.
+Pruebas: node scripts/run-all-tests.cjs => 273/279 aprobadas.
+Fallos detectados: G3_BACKUP_GUARDADO, G3_FEHE_ROTULACION_30CM, G3_GUIA_ORDENES, G4_CAMPFIRE_PLACEMENT, META3_DEFERRED_SAVE_RESTORE, META3_GUARDADO_TRANSPORTE_RECUPERACION.
+Estas pruebas ya dependen de comportamientos modificados en pasadas anteriores; no se atribuye su causa a los cambios gráficos sin investigación.
+Compilación y revisión visual: NO verificadas en esta pasada.
+No publicar repositorio. Unreal pospuesto hasta después del concurso.

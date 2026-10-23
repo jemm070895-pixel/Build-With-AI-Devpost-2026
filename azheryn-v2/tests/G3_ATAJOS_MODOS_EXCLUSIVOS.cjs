@@ -1,0 +1,13 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const src = fs.readFileSync(path.join(__dirname,'../src/ui/WorldView.tsx'),'utf8');
+const shortcut = src.match(/if \(k === "m" \|\| k === "t"\) \{([\s\S]*?)const mode = k ===/);
+assert.ok(shortcut,'Missing keyboard move/log handler');
+assert.match(shortcut[1],/buildingModeRef\.current = false/);
+assert.match(shortcut[1],/stockpileModeRef\.current = false/);
+assert.match(shortcut[1],/loggingTargetRef\.current = null/);
+const esc = src.match(/if \(k === "escape"\) \{([\s\S]*?)e\.preventDefault\(\); return;/);
+assert.ok(esc,'Missing Escape handler');
+assert.match(esc[1],/loggingTargetRef\.current = null/);
+console.log('G3 exclusive command modes: OK');

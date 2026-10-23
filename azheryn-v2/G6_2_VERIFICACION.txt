@@ -1,0 +1,1 @@
+G6.2: siluetas de copas menos geométricas y variación tonal del río. No altera lógica. Compilación pendiente de dependencias React/Vite.

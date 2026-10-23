@@ -1,0 +1,54 @@
+AZHERYN V2 — META 3 — AUDITORIA DE CODIGO 2026-10-21
+UNICO PROYECTO: ACADEMIA-AZHERIN-PRIVATE/azheryn-v2
+Correcciones verificadas en codigo:
+1. La pausa detiene simulacion, incluido descanso, desplazamiento, tala y transporte.
+2. Orden manual de movimiento cancela acarreo, libera reserva de arbol y descarta orden anterior.
+3. Reubicar acopio cancela transporte en curso y limita su centro al mundo.
+4. Tala requiere titularidad de reserva del arbol.
+5. Los troncos lejanos pueden solicitar transporte sin bloqueo por radio fijo.
+6. Acopio evita repeticion de posiciones en acumulaciones largas.
+7. Tests dinamicos del modulo de trabajo actualizados para politica de distancia.
+PRUEBAS: 32/32 validador offline; 7/7 dinamicas de modulo work.ts (tsc global); 10/10 guardas de integracion por inspeccion estatica; ZIP integridad.
+LIMITACIONES: NO se ha compilado toda la aplicacion con React/Vite ni ejecutado playtest visual. Pruebas estaticas no prueban interaccion real ni ausencia de otros errores.
+PENDIENTES PARA CIERRE DE META 3: revision funcional integral, compilacion y ejecucion en laptop ANTES de META 4, corregir hallazgos de playtest.
+METODOLOGIA: presentar 3 definiciones y esperar aprobacion; integrar completas antes de presentar otras. Mantener un solo ZIP consolidado.
+
+AUDITORIA REPETIDA: 4 ajustes de interacción y órdenes; compilación integral pendiente antes de META 4.
+
+AUDITORIA REPETIDA 3 — 2026-10-21:
+- Corregido destino fantasma cuando el arbol desaparece o deja de pertenecer al guardia.
+- Corregida zona de tala obsoleta si no se encuentra arbol para una orden.
+- Tras entregar el ultimo tronco pendiente, los guardias libres reanudan la tala en su zona; respeta ordenes directas y descanso.
+- Actualizada prueba de integracion que usaba una coincidencia textual obsoleta.
+- VALIDACION: 32/32 offline; 14/14 integracion; 7/7 logica dinamica; 6/6 interaccion.
+- PENDIENTE: compilacion integral con dependencias React/Vite y playtest en laptop antes de META 4.
+
+AUDITORÍA ADICIONAL 2026-10-21:
+- Corregida la reubicación del acopio: troncos ya almacenados se recolocan dentro del nuevo perímetro.
+- Reparada prueba de acopio que buscaba un filtro de guardias antiguo, previo a excluir a Mui.
+- Pruebas dinámicas de work.ts: 7/7. Reubicación: 6/6. Acopio estático: 6/6.
+- Pendiente al cierre de META 3: compilación React/Vite, simulación integral y prueba en laptop antes de META 4.
+
+AUDITORÍA SEXTA (2026-10-21): corregida velocidad de clima duplicada y distribución radial del acopio; nueva prueba dinámica META3_AUDITORIA_SEXTA.cjs. Pendiente compilación integral antes de META 4.
+
+AUDITORÍA SÉPTIMA (2026-10-21)
+- Corregida cadencia de actualización de clima: la comparación anterior mezclaba reloj real con dt multiplicado por velocidad; x2/x4 provocaban refrescos extra y Pausa podía impedir refresco.
+- Ahora la cadencia de snapshot es cada 0,5 segundos reales y se evita setState innecesario en pausa.
+- Nueva prueba: azheryn-v2/tests/META3_AUDITORIA_SEPTIMA.cjs (9/9).
+- Pruebas previas ejecutadas: 7/7, 5/5, 4/4, 14/14, 6/6 y 6/6.
+- Compilación completa y pruebas visuales siguen pendientes para el cierre de META 3 antes de META 4.
+
+AUDITORÍA TRANSVERSAL META 0–3 — 2026-10-21:
+- META 0: revisados contrato temporal (año 700) y moneda OKEYE; sin cambio de canon.
+- META 1: revisados contrato geográfico de referencia africana y límites de cámara; sin cambios.
+- META 2: corregido error de precisión flotante en minuto del reloj a velocidades ×2 y ×4; comprobación dinámica de Pausa, ×1, ×2, ×4 satisfactoria.
+- META 3: al cambiar selección o colocar acopio se invalida objetivo de tala anterior; orden de tala sin personajes seleccionados no actúa; se muestra aviso si no hay árboles disponibles.
+- Actualizada prueba de integración con comparación textual obsoleta. Nueva prueba AUDITORIA_META0_META3_OCT21.cjs.
+- Todos los archivos de pruebas .cjs ejecutados sin errores tras correcciones. NO equivale a compilación React/Vite ni playtest.
+- Pendiente para cierre de META 3: compilación y prueba en laptop ANTES de iniciar META 4.
+
+2026-10-22: CORRECCION: hambre/sed NPC activas en Cap 1, integracion fisica pendiente. Ver 07_EVIDENCE/META3_CORRECCION_ALCANCE_NECESIDADES_2026-10-22.md
+
+2026-10-22: Búsqueda de agua dirigida a tiles reales de agua. Pruebas tests/*.cjs 15/15 (salida 0). Alimentos físicos, guardado offline, build y prueba visual pendientes. Ver 07_EVIDENCE/META3_AUDITORIA_AGUA_2026-10-22.md.
+
+2026-10-22: corregida espera de escritura de caché en service worker (navegación y recursos). 19/19 suites .cjs correctas. Build Vite bloqueado por paquete no disponible offline. Prueba de arranque offline en navegador pendiente.

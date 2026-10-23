@@ -1,0 +1,11 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const src = fs.readFileSync(path.join(__dirname, '../src/world/renderer.ts'), 'utf8');
+assert.match(src, /Keep the shoal inside its own water cell/);
+assert.match(src, /const wander = Math\.sin\(swim \+ shoalX\)/);
+assert.match(src, /Slow eddies in deep water/);
+assert.match(src, /depth > 0\.055 && a > 4/);
+assert.match(src, /Small dorsal fin and eye/);
+assert.match(src, /fishSize > 1\.8/);
+console.log('G2 peces detallados y remolinos: 6 comprobaciones OK');

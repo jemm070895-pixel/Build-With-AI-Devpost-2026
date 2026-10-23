@@ -1,0 +1,5 @@
+AZHERYN V2 G6.1 - 2026-10-23
+Cambios: sombras direccionales de arboles de conifera y hoja ancha; reflejos fragmentados en copas.
+Sin modificaciones de reglas de juego ni contenidos.
+Compilacion intentada: npm run build -> TS2688: definiciones react y react-dom ausentes en node_modules local.
+Compilacion y prueba visual pendientes en laptop con npm ci.

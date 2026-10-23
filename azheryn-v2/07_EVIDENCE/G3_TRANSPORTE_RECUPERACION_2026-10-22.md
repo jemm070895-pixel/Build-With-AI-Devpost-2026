@@ -1,0 +1,1 @@
+G3: detección de transporte inmóvil durante 25 segundos, cancelación segura y reintento; reinicio del contador al cambiar fase. 61/61 pruebas CJS superadas. Compilación Vite y partida Windows pendientes.

@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const source=fs.readFileSync('src/world/saveSlots.ts','utf8');
+assert.match(source,/readChapterSave/);
+assert.match(source,/isUsableChapterSave/);
+const ui=fs.readFileSync('src/ui/WorldView.tsx','utf8');
+assert.match(ui,/readChapterSave\(localStorage.getItem\(SAVE_KEY\)/);
+assert.match(ui,/BACKUP_SUFFIX/);
+assert.match(ui,/Partida recuperada desde respaldo/);
+console.log('OK G3 respaldo y recuperación');

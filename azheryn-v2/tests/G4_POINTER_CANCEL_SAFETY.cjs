@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const source=fs.readFileSync(path.join(__dirname,'../src/ui/WorldView.tsx'),'utf8');
+const handler=source.slice(source.indexOf('const onPointerUp ='),source.indexOf('const onWheel ='));
+assert.match(handler,/if\(e\.type === "pointercancel"\) \{\s*resetInterruptedGestures\(\)/);
+assert.ok(handler.indexOf('if(e.type === "pointercancel")')<handler.indexOf('if(e.pointerType === "touch")'),'Cancellation must precede touch tap handling');
+assert.match(source,/visibilityState === "hidden"\) resetInterruptedGestures\(\)/);
+assert.match(source,/canvas\.style\.cursor="grab"; dirty=true/);
+console.log('G4 pointer cancellation and background safety OK');

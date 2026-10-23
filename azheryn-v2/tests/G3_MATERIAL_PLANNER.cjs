@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const source=fs.readFileSync('src/world/materialPlanner.ts','utf8');
+const ui=fs.readFileSync('src/ui/WorldView.tsx','utf8');
+assert.match(source,/loose-inTransit/);
+assert.match(ui,/materials\.toGather/);
+assert.match(ui,/materials\.awaitingPickup/);
+assert.match(ui,/materials\.inTransit/);
+assert.doesNotMatch(ui,/logsCount\.waiting-\(logsCount\.hauling\?1:0\)/);
+console.log('G3 material planner: OK');

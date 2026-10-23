@@ -1,0 +1,11 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const view = fs.readFileSync('src/ui/WorldView.tsx','utf8');
+const transfer = fs.readFileSync('src/world/saveTransfer.ts','utf8');
+assert.match(view,/Exportar partida/);
+assert.match(view,/Importar partida/);
+assert.match(view,/importSaveRef/);
+assert.match(view,/installPortableSave\(localStorage, transferKey, value\)/);
+assert.match(transfer,/isUsableChapterSave/);
+assert.match(transfer,/8_000_000/);
+console.log('PASS G3 portable save export/import UI and validation');

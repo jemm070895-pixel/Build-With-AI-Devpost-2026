@@ -1,0 +1,13 @@
+const assert=require('node:assert/strict');
+const {repairChapterSave,readChapterSave,BACKUP_SUFFIX}=require('../src/world/saveSlots.ts');
+const chars=Array.from({length:8},(_,i)=>({id:i?'guard-'+i:'mui',mui:i===0,x:i,y:0,tx:i,ty:0}));
+const save=JSON.stringify({version:1,characters:chars,felledLogs:[],workTrees:[]});
+const data=new Map([['game','{invalid'],['game'+BACKUP_SUFFIX,save]]);
+const storage={getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,v)};
+assert.equal(repairChapterSave(storage,'game'),'backup');
+assert.equal(readChapterSave(data.get('game'),null).source,'primary');
+assert.equal(data.get('game'+BACKUP_SUFFIX),save);
+assert.equal(repairChapterSave(storage,'game'),'primary');
+data.delete('game');data.delete('game'+BACKUP_SUFFIX);
+assert.equal(repairChapterSave(storage,'game'),'none');
+console.log('G3 backup repair OK');

@@ -1,0 +1,11 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const file = fs.readFileSync(path.join(__dirname, '../src/world/saveRecovery.ts'), 'utf8');
+const ui = fs.readFileSync(path.join(__dirname, '../src/ui/WorldView.tsx'), 'utf8');
+assert.match(file, /export function recoverStorehouse/);
+assert.match(file, /Math\.floor\(s\.committed\)/);
+assert.match(file, /Math\.min\(2\.999, s\.progressSeconds\)/);
+assert.match(file, /complete = committed === STOREHOUSE_G1\.logsRequired/);
+assert.match(ui, /storehouse=recoverStorehouse\(saved\.storehouse\)/);
+console.log('G3_SAVE_RECOVERY OK');

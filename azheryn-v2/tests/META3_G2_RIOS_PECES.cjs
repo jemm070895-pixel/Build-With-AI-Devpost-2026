@@ -1,0 +1,10 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const source=fs.readFileSync(path.join(__dirname,'../src/world/renderer.ts'),'utf8');
+assert.match(source,/if \(water\) \{/);
+assert.match(source,/G2 river surface/);
+assert.match(source,/depth > 0\.018/);
+assert.match(source,/ctx\.ellipse\(0, 0, fishSize/);
+assert.match(source,/ctx\.quadraticCurveTo/);
+console.log('G2 river and visual fish checks passed');

@@ -1,0 +1,10 @@
+const fs = require('node:fs'); const assert = require('node:assert/strict');
+const root = __dirname + '/../';
+const world = fs.readFileSync(root+'src/ui/WorldView.tsx','utf8');
+const intro = fs.readFileSync(root+'src/ui/IntroStory.tsx','utf8');
+const canon = fs.readFileSync(root+'src/foundation/meta0.ts','utf8');
+assert.match(world,/handleH = bladeH \* \(13 \/ 17\)/);
+assert.match(intro,/mango 13 cm/);
+assert.match(canon,/totalLengthCm: 30/);
+assert.match(canon,/handleLengthCm: 13/);
+console.log('Fehe 30/17/13 OK');

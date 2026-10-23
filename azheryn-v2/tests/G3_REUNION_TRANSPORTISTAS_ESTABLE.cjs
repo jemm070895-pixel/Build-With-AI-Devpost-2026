@@ -1,0 +1,10 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const source = fs.readFileSync(path.join(__dirname,'../src/ui/WorldView.tsx'),'utf8');
+const rendezvous = source.match(/const candidates=characters\.filter[\s\S]*?for\(const worker of candidates\.slice/);
+assert.ok(rendezvous,'Carrier rendezvous selection must exist');
+assert.match(rendezvous[0],/g1CanJoinHaul\(ch\.x,ch\.y,log\.x,log\.y,ch\.fatigue\)/,'Exhausted guards cannot be assigned');
+assert.match(rendezvous[0],/assignedA-assignedB/,'Existing rendezvous assignments have priority');
+assert.match(source,/if\(ids\.length===log\.transportersRequired\)/,'Transport begins only with a full pair');
+console.log('G3 stable carrier rendezvous: OK');

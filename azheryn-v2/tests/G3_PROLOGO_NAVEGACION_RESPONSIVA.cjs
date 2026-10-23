@@ -1,0 +1,14 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const path = require('node:path');
+const base = path.join(__dirname, '..');
+const tsx = fs.readFileSync(path.join(base,'src/ui/IntroStory.tsx'),'utf8');
+const css = fs.readFileSync(path.join(base,'src/ui/IntroStory.css'),'utf8');
+assert.match(tsx, /new Image\(\)/, 'La siguiente escena debe precargarse');
+assert.match(tsx, /ArrowRight/);
+assert.match(tsx, /ArrowLeft/);
+assert.match(tsx, /aria-label=\{`/);
+assert.match(css, /max-height:540px/);
+assert.match(css, /focus-visible/);
+assert.ok(fs.existsSync(path.join(base,'public/intro/Fehe_original.jpeg')));
+console.log('Prólogo: navegación y Fehe originales comprobados');

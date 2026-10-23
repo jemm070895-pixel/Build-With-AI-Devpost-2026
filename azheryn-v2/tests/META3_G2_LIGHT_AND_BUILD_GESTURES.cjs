@@ -1,0 +1,11 @@
+const fs=require("node:fs");
+const assert=require("node:assert/strict");
+const src=fs.readFileSync(require("node:path").join(__dirname,"../src/ui/WorldView.tsx"),"utf8");
+assert.match(src,/const building = !isNight\(characterSun\.hour\) && !ch\.mui/);
+assert.match(src,/!storehouse\.complete && stockpile/);
+assert.match(src,/Math\.hypot\(ch\.x-storehouse!\.x,ch\.y-storehouse!\.y\) <= 8/);
+assert.match(src,/const buildPulse = building/);
+assert.match(src,/const daylight = g3Weather/);
+assert.match(src,/daylight\.light > \.30/);
+assert.match(src,/commitStorehouseLogs/);
+console.log("G2 ambient light and construction gesture checks passed");

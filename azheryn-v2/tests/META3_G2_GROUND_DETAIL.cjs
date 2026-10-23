@@ -1,0 +1,1 @@
+const fs=require("node:fs");const assert=require("node:assert/strict");const s=fs.readFileSync(require("node:path").join(__dirname,"../src/ui/WorldView.tsx"),"utf8");assert.match(s,/const drawGroundDetail = \(\) =>/);assert.match(s,/drawn<480/);assert.match(s,/drawGroundDetail\(\);[\s\S]*?drawWorkTrees\(\)/);console.log("G2 ground detail checks passed");

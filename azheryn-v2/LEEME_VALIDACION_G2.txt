@@ -1,0 +1,10 @@
+AZHERYN V2 - COMO VALIDAR G2
+
+1. Extrae el ZIP completo en una carpeta normal de Windows.
+2. Entra en ACADEMIA-AZHERIN-PRIVATE\azheryn-v2.
+3. Haz doble clic en VALIDAR_Y_JUGAR_G2.bat.
+4. Espera las pruebas y la compilacion. El navegador abrira el juego.
+5. Prueba seleccionar a Mui, dar ordenes, talar un arbol, definir una zona, transportar troncos y construir el almacen hasta 91/91.
+6. Si falla, envia VALIDACION_G2_RESULTADOS.txt y una captura.
+
+NOTA: las pruebas automatizadas no sustituyen la prueba visual ni la partida completa.

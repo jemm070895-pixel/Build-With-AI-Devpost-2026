@@ -1,0 +1,5 @@
+AZHERYN V2 — META 3 — 2026-10-21
+Proyecto unico. Se corrigio el escalado temporal de agentes: x0, x1, x2, x4. La camara permanece controlable durante pausa. Se repararon rutas y formato CommonJS de validadores dentro del proyecto.
+Validacion: 32 generales + 11 especificas; NO equivale a compilacion completa ni prueba visual.
+METODOLOGIA: corregir errores existentes; luego proponer TRES definiciones al usuario; NO implementar nuevas definiciones hasta su confirmacion.
+PUERTA: antes de iniciar META 4, compilar y probar version de META 3 en laptop; META 4 no consiste en compilacion.

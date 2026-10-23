@@ -1,0 +1,10 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const src = fs.readFileSync('src/ui/WorldView.tsx', 'utf8');
+assert.match(src, /k === "h" && !e\.repeat/);
+assert.match(src, /cam\.x = mui\.x; cam\.y = mui\.y/);
+assert.match(src, /clampCamera\(cam, baked\)/);
+assert.match(src, /\["\+", "=", "-", "_"\]/);
+assert.match(src, /MIN_ZOOM, MAX_ZOOM/);
+assert.match(src, /H centrar Mui/);
+console.log('G3 camera shortcuts OK');
