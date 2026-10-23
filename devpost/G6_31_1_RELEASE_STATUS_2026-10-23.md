@@ -2,7 +2,7 @@
 
 - Candidate: **G6.31.1**, browser game, Chapter 1.
 - Source of truth for this candidate: locally packaged `AZHERYN_V2_G6_31_1_COMPILACION_CORREGIDA.zip` (not yet uploaded to this repository).
-- User reports the game works on Windows; G6.31 had a TypeScript tuple error, fixed in G6.31.1. **G6.31.1 compilation and end-to-end acceptance are still pending independent confirmation.**
+- User reports the game works on Windows; G6.31 had a TypeScript tuple error, fixed in G6.31.1. **Owner confirmed on 2026-10-23 that G6.31.1 runs correctly on the Windows laptop.** This is owner acceptance, not an independently recorded clean CI build.
 - Scope: Mui and seven guards, forestry and paired log hauling, stockpile up to 264 logs, 91-log storehouse, bilingual interface, prologue, mission guide, and end-of-chapter epilogue.
 - Future chapters (not implemented in this contest build): food systems, trades, villages, markets, kingdoms, and broader strategic mechanics.
 - The Devpost Learn Skill Pack and `devpost/scope.md`, `devpost/prd.md`, `devpost/spec.md` already exist in this repository. Their contents should be reconciled with G6.31.1 before submission.
