@@ -25,3 +25,8 @@ The owner supplied this reflection in their own words on 2026-10-23: “Me sirvi
 Final Review: **owner acceptance recorded; detailed checklist and independent build evidence remain incomplete**.
 Code Tour and App Map: **technical map published; learner reflection recorded**.
 6-ship: **not complete**.
+
+## Owner's Windows build verification — 2026-10-23
+The owner provided a screenshot of a successful `npm run build` in the original corrected G6.31.1 local project, at `ACADEMIA-AZHERIN-PRIVATE/azheryn-v2`. Vite reported **54 modules transformed**, production files written to `dist/`, and **built in 319ms**. The command returned to the shell prompt with no displayed error. This verifies the original local release on Windows; it is not a separate clean build of the public GitHub checkout. The owner previously confirmed gameplay worked correctly and approved the release. Historical textual tests are retained as diagnostic evidence, not an acceptance requirement where they contradict the current approved game.
+
+**Skill 5 closure:** Original PoC built, tested by the owner, reviewed and accepted; source map and learner reflection recorded. Public repository source was published separately. No further game feature changes required for the contest chapter.
