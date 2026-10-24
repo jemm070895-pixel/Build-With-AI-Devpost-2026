@@ -3,7 +3,7 @@
 Updated 2026-10-23. **No Devpost form was edited or submitted.**
 
 ## Confirmed technical details
-- Working title: AZHERYN V2 — Chapter 1.
+- Owner-approved official submission title: **AZHERYN V2 — Capítulo 1** (confirmed 2026-10-23).
 - Public repository: https://github.com/jemm070895-pixel/Build-With-AI-Devpost-2026
 - Source directory: https://github.com/jemm070895-pixel/Build-With-AI-Devpost-2026/tree/main/azheryn-v2
 - Stack: React 19, TypeScript, Vite, browser UI.
@@ -23,6 +23,7 @@ Updated 2026-10-23. **No Devpost form was edited or submitted.**
 The previously AI-written `SUBMISSION_DRAFT_2026-10-23.md` is **not learner-authored** and **must not be pasted as the final Devpost submission**. The 6-ship skill requires the learner to write the project name, short description and other submission responses personally; the assistant may point out gaps and correct spelling/grammar only.
 
 ## Pending form fields / actions
+- [x] Owner-authored long description preserved verbatim in [LEARNER_AUTHORED_DESCRIPTION_2026-10-23.md](LEARNER_AUTHORED_DESCRIPTION_2026-10-23.md); official title approved.
 - [ ] Learner-authored short description and other mandatory answers in the actual form.
 - [ ] Exact current Devpost form fields and any video constraints reviewed by the learner; provide screenshots if access is restricted.
 - [ ] Required short video of actual gameplay, publicly accessible.
