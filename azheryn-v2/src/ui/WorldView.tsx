@@ -189,7 +189,7 @@ export function WorldView() {
       if(!chosen)return;
       if(manualHaulPrimary && !manualHaulHelper && id!==manualHaulPrimary){
         const primary=characters.find(ch=>ch.id===manualHaulPrimary);
-        if(chosen.resting || chosen.needTrip || chosen.order || isAnyHauler(chosen.id) || isQueuedWorker(chosen.id)){
+        if(chosen.needTrip || chosen.order || isAnyHauler(chosen.id) || isQueuedWorker(chosen.id)){
           setWorkNotice(t("Ese compañero está ocupado. Selecciona otro.","That companion is busy. Choose another."));return;
         }
         manualHaulHelper=id;manualHaulWaitingForLog=true;setCompanionPrompt(false);
@@ -205,7 +205,7 @@ export function WorldView() {
       const id=(event as CustomEvent<{id:string}>).detail?.id;
       const primary=characters.find(ch=>ch.id===id) ?? characters.find(ch=>ch.selected);
       if(!primary){setWorkNotice(t("Selecciona primero un personaje.","Select a character first."));return;}
-      if(primary.resting || primary.needTrip || primary.order || isAnyHauler(primary.id) || isQueuedWorker(primary.id)){
+      if(primary.needTrip || primary.order || isAnyHauler(primary.id) || isQueuedWorker(primary.id)){
         setWorkNotice(t("Ese personaje está ocupado.","That character is busy."));return;
       }
       if(!stockpile){setWorkNotice(t("Primero coloca el acopio.","Place the stockpile first."));return;}
@@ -2102,7 +2102,20 @@ export function WorldView() {
               if(restingNow) ch.socialRestSeconds=(ch.socialRestSeconds ?? 0)+dt;
               if((ch.socialRestSeconds ?? 0)>=60){const minutes=Math.floor((ch.socialRestSeconds ?? 0)/60);ch.socialRestSeconds ??= 0;ch.socialRestSeconds-=minutes*60;ch.social=restSocialState(ch.social ?? initialSocialState(),minutes/60);dirty=true;}
               ch.fatigue=recoverFatigue(ch.fatigue,dt);if(readyToResumeRememberedTask(ch.fatigue)){ch.resting=false;dirty=true;if(ch.pendingLoggingZone && !ch.order){const zone=ch.pendingLoggingZone;ch.pendingLoggingZone=undefined;ch.previousOrder=undefined;ch.loggingZone=zone;const tree=reserveNearestTreeInZone(workTrees,ch.id,zone.x,zone.y);if(tree){ch.treeId=tree.id;ch.order=createLoggingOrder(tree.x,tree.y);ch.tx=tree.x;ch.ty=tree.y;}else{ch.loggingZone=undefined;}dirty=true;}if(ch.previousOrder && !ch.order){const remembered=ch.previousOrder;ch.previousOrder=undefined;const tree=reserveRememberedLoggingTree(workTrees,ch.id,remembered,ch.loggingZone);if(tree){ch.treeId=tree.id;ch.order=createLoggingOrder(tree.x,tree.y);ch.tx=tree.x;ch.ty=tree.y;}else{ch.tx=ch.x;ch.ty=ch.y;}dirty=true;}}continue;}
-            if(ch.order||isAnyHauler(ch.id)){ch.fatigue=advanceFatigue(ch.fatigue,dt);const decision=g1FatigueDecision(ch.fatigue);if(decision!=="continue"){if(ch.order)ch.previousOrder=ch.order;if(isAnyHauler(ch.id)) cancelWorkerHaul(ch.id);if(ch.order)releaseTree(ch);ch.order=undefined;ch.resting=true;ch.tx=ch.x;ch.ty=ch.y;dirty=true;continue;}}
+            if(ch.order||isAnyHauler(ch.id)){
+              ch.fatigue=advanceFatigue(ch.fatigue,dt);
+              const decision=g1FatigueDecision(ch.fatigue);
+              // A direct two-person haul ordered by Mui remains active at night.
+              // Fatigue can still trigger recovery once the log is delivered;
+              // essential water/food trips above retain their priority.
+              const completingDirectHaul=isAnyHauler(ch.id) && continuousHaulers.has(ch.id);
+              if(decision!=="continue" && !completingDirectHaul){
+                if(ch.order)ch.previousOrder=ch.order;
+                if(isAnyHauler(ch.id))cancelWorkerHaul(ch.id);
+                if(ch.order)releaseTree(ch);
+                ch.order=undefined;ch.resting=true;ch.tx=ch.x;ch.ty=ch.y;dirty=true;continue;
+              }
+            }
           }
           // Validate a reserved tree before walking, not only after arriving.
           // Otherwise an obsolete logging order can send a guard across the map.
