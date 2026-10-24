@@ -8,19 +8,40 @@ export const PEACEFUL_ANIMALS: readonly PeacefulAnimal[] = Object.freeze([
   { id: "bird-1", kind: "bird", x: 60, y: -90, phase: 4.1 },
   { id: "bird-2", kind: "bird", x: 85, y: -105, phase: 5.2 },
 ]);
+// Stable waypoints with species-specific pacing and pauses.
+function stableUnit(seed: number): number {
+  const v = Math.sin(seed * 127.1 + 78.233) * 43758.5453;
+  return v - Math.floor(v);
+}
+function waypoint(animal: PeacefulAnimal, step: number) {
+  const seed = animal.phase * 97 + (animal.kind === "bird" ? 41 : animal.kind === "rabbit" ? 23 : 7);
+  const rangeX = animal.kind === "bird" ? 150 : animal.kind === "rabbit" ? 52 : 90;
+  const rangeY = animal.kind === "bird" ? 125 : animal.kind === "rabbit" ? 46 : 75;
+  return {x: animal.x * 3.2 + (stableUnit(seed + step * 2 + 1) * 2 - 1) * rangeX,
+    y: animal.y * 3.2 + (stableUnit(seed + step * 2 + 2) * 2 - 1) * rangeY};
+}
+export function animalMovementPhase(animal: PeacefulAnimal, seconds: number) {
+  const duration = animal.kind === "bird" ? 110 : animal.kind === "rabbit" ? 85 : 155;
+  const elapsed = Math.max(0, Number.isFinite(seconds) ? seconds : 0) + animal.phase * duration;
+  const segment = Math.floor(elapsed / duration);
+  const phase = (elapsed % duration) / duration;
+  const rest = animal.kind === "bird" ? 0 : animal.kind === "rabbit" ? .36 : .28;
+  const moving = phase > rest;
+  const u = Math.max(0, Math.min(1, (phase - rest) / (1 - rest)));
+  const eased = u * u * (3 - 2 * u);
+  return { segment, phase, moving, eased };
+}
 export function animalPosition(a: PeacefulAnimal, seconds: number): {x:number;y:number} {
-  // Each animal traverses a broad, continuous path across the map. The route
-  // passes near the clearing periodically, without teleportation or spawning.
-  const speed = a.kind === "bird" ? .006 : a.kind === "rabbit" ? .0022 : .0014;
-  const t=seconds*speed+a.phase;
-  // Each animal has a distant home territory, away from Mui's central clearing.
-  // Birds roam more broadly; all movement remains continuous and unforced.
-  const rangeX=a.kind === "bird" ? 135 : a.kind === "rabbit" ? 55 : 80;
-  const rangeY=a.kind === "bird" ? 110 : a.kind === "rabbit" ? 45 : 65;
-  return {
-    x:a.x * 3.2 + Math.sin(t)*rangeX + Math.sin(t*2.3+a.phase)*12,
-    y:a.y * 3.2 + Math.sin(t*.73+a.phase*.35)*rangeY + Math.cos(t*1.7)*9,
-  };
+  const {segment, eased} = animalMovementPhase(a, seconds);
+  const from = waypoint(a, segment), to = waypoint(a, segment + 1);
+  return {x:from.x+(to.x-from.x)*eased,y:from.y+(to.y-from.y)*eased};
+}
+export function keepOutsideClearing<T extends {x:number;y:number}>(position:T, animal:PeacefulAnimal):T {
+  const minimumDistance = animal.kind === "bird" ? 215 : 195;
+  const distance = Math.hypot(position.x,position.y);
+  if(distance>=minimumDistance)return position;
+  const angle=distance>.001?Math.atan2(position.y,position.x):Math.atan2(animal.y,animal.x);
+  return {...position,x:Math.cos(angle)*minimumDistance,y:Math.sin(angle)*minimumDistance};
 }
 
 /** Presentation-only avoidance: animals keep a respectful distance from people. */
@@ -44,7 +65,7 @@ export function animalAvoidance(
     dy += (distance < 0.001 ? 0 : vy / safe) * strength;
   }
   const magnitude = Math.hypot(dx, dy);
-  if (magnitude < 0.001) return { ...base, alert: false };
+  if (magnitude < 0.001) return keepOutsideClearing({ ...base, alert: false }, animal);
   const displacement = Math.min(animal.kind === "bird" ? 12 : 17, magnitude * 16);
-  return { x: base.x + dx / magnitude * displacement, y: base.y + dy / magnitude * displacement, alert: true };
+  return keepOutsideClearing({ x: base.x + dx / magnitude * displacement, y: base.y + dy / magnitude * displacement, alert: true }, animal);
 }
