@@ -31,4 +31,4 @@ Original source code in the paths specified by [LICENSE](LICENSE) is MIT-license
 
 ## Submission status
 
-This repository contains an earlier game code state; **the G6.31.1 source package has not yet been synchronized here**. Its final build, test evidence, media rights review and Devpost submission must be confirmed before declaring the release complete. See [release status](../devpost/G6_31_1_RELEASE_STATUS_2026-10-23.md).
+The owner published the original G6.31.1 contest game to this public repository on 2026-10-23. The original Windows release was played and approved by the owner, and its production build completed successfully (Vite: 54 modules, 319 ms). A separate clean build of this public checkout is not claimed. The Devpost demo video and final submission are still pending. See [final review](../devpost/FINAL_REVIEW_G6_31_1.md) and [shipping checklist](../devpost/checklist.md).
