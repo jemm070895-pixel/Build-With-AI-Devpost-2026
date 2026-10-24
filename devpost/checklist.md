@@ -74,3 +74,22 @@ Earlier prototype history is retained privately.
 - [ ] Submit before **2026-10-26 5:00 PM ET / 2:00 PM Arizona (MST)**.
 
 Peer feedback, Discord posts and live deployment are **optional** per the installed 6-ship skill; no peer-review quota is required.
+
+## Hands-on Checkpoints
+- [x] Owner tested G6.31.1 on their Windows laptop and reported that the game works correctly (2026-10-23).
+- [ ] Per-slice learner checks were not individually recorded in the historical checklist; do not invent them.
+
+## Final Review
+- [x] Owner explicitly accepted the Windows G6.31.1 playable release.
+- [x] Technical final-review evidence documented in [FINAL_REVIEW_G6_31_1.md](FINAL_REVIEW_G6_31_1.md).
+- [ ] Reconcile historical test suite and perform a reproducible full build of the public commit. A fresh 2026-10-23 isolated run of the 280 legacy `tests/*.cjs` scripts from the packaged `azheryn-v2/` directory yielded 204 passes and 76 failures; many failures are textual assertions or module-loading failures. This is **not** evidence of 76 gameplay defects, but cannot be treated as a clean pass.
+- [ ] Record the remaining mechanical evidence or explicitly document accepted exceptions before closing 5-build.
+
+## Code Tour and App Map
+- [x] [app-map.html](app-map.html) published as the technical source tour.
+- [x] Owner's learning reflection was received and recorded verbatim in [FINAL_REVIEW_G6_31_1.md](FINAL_REVIEW_G6_31_1.md).
+- [ ] A hands-on code-tour activity was not separately demonstrated; the technical map and reflection are documented without claiming such an activity occurred.
+
+## Revisions
+- 2026-10-23: Retrospectively reconciled the legacy G1/G3 checklist with the owner-approved G6.31.1 release without fabricating historical per-slice checks.
+- 2026-10-23: Public original game upload verified; technical suite still requires classification and a reproducible build. Do not mark Skill 5 complete solely because the game launched successfully.
