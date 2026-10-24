@@ -29,7 +29,8 @@ The previously AI-written `SUBMISSION_DRAFT_2026-10-23.md` is **not learner-auth
 - [ ] Required short video of actual gameplay, publicly accessible.
 - [ ] Enter public repository URL in the form's **Try it out** field.
 - [ ] Complete exit survey and age confirmation if prompted.
-- [ ] Confirm repository history and files contain no exposed credentials/private learner profile. A filename-level or history-wide audit has **not** been completed.
+- [x] Verify that `devpost/learner-profile.md` is absent from the public default branch (GitHub returned 404) and root `.gitignore` explicitly excludes it, `.env` and `.env.*` (except `.env.example`); checked 2026-10-23.
+- [ ] Audit the **entire** public repository tree and Git history for exposed credentials, private files and unrelated material. The above spot-check does not prove history is clean.
 - [ ] Review and submit before 2026-10-26 5:00 PM ET (2:00 PM Arizona MST).
 
 Optional: deployed playable link, Discord participation, peer feedback. Neither substitutes for video or GitHub.
@@ -39,3 +40,6 @@ Show real game: introduction → Mui and guards → tree selection and cutting �
 
 ## Shipping status
 Game original uploaded, local build and owner gameplay accepted, skills 1–5 closed. Skill 6 remains open until learner-authored form, required video, exit survey and actual Devpost submission are completed.
+
+## Privacy spot-check — 2026-10-23
+GitHub's public default-branch content API returned NOT_FOUND for `devpost/learner-profile.md`. Root `.gitignore` contains the expected ignore patterns. No private learner-profile text was copied into this report. Git history and all other paths have **not** been exhaustively scanned, so this is a limited positive check, not a full security clearance.
