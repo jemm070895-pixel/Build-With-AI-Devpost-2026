@@ -1,3 +1,5 @@
+> **ARCHIVED AI-WRITTEN WORKING NOTES — NOT FOR SUBMISSION.** The official 6-ship Skill requires the learner to write their own Devpost project description and responses. Do not paste the draft below into the final submission. See [technical submission preparation](SKILL6_PREVIDEO_PREPARATION.md).
+
 # Devpost submission draft — AZHERYN V2: Chapter 1
 
 ## Inspiration
