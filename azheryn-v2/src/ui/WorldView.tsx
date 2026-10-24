@@ -278,6 +278,12 @@ export function WorldView() {
     const project = (u: number, v: number) => ({ x: (u - v) * 14 + (baked?.ox ?? 0), y: (u + v) * 13 + (baked?.oy ?? 0) - 24 });
     const toScreen = (p: {x:number;y:number}) => ({ x: (p.x - cam.x) * cam.zoom + width / 2, y: (p.y - cam.y) * cam.zoom + height / 2 });
     const insideWorld = (x:number,y:number) => baked ? {x:clamp(x,0,baked.width),y:clamp(y,0,baked.height)} : {x,y};
+    // Wildlife paths are local offsets around the map centre, not absolute canvas coordinates.
+    // Both rendering and the animal locator must use the same world-space conversion.
+    const wildlifeWorldPosition = (animal: (typeof PEACEFUL_ANIMALS)[number], seconds: number) => {
+      const local = animalAvoidance(animal, seconds, characters);
+      return { x: (baked?.ox ?? 0) + local.x, y: (baked?.centerY ?? 0) + local.y, alert: local.alert };
+    };
     // Select a real water tile instead of an arbitrary offset. Water is sampled
     // from the generated terrain; food remains a separate pending system.
     const nearestWaterDestination = (x:number,y:number) => {
@@ -1416,11 +1422,11 @@ export function WorldView() {
       // One climate sample per frame: animal shadows share the same daylight as the forest.
       const wildlifeShadowLight = Math.max(0, Math.min(1, wildlifeLight.light * (1 - wildlifeLight.cloud * .6)));
       for (const animal of PEACEFUL_ANIMALS) {
-        const worldPosition = animalAvoidance(animal, time, characters);
+        const worldPosition = wildlifeWorldPosition(animal, time);
         const p = toScreen(worldPosition);
         if (p.x < -45 || p.x > width + 45 || p.y < -45 || p.y > height + 45) continue;
         const scale = Math.max(.85, Math.min(2, cam.zoom));
-        const future = animalAvoidance(animal, time + .2, characters);
+        const future = wildlifeWorldPosition(animal, time + .2);
         const facing = future.x >= worldPosition.x ? 1 : -1;
         const motionTime = reduceWildlifeMotion ? 0 : time;
         const hopping = animal.kind === "rabbit" && !reduceWildlifeMotion ? Math.abs(Math.sin(motionTime * (worldPosition.alert ? 6 : 3.2) + animal.phase)) * 3 : 0;
@@ -2670,7 +2676,7 @@ export function WorldView() {
         : t("No hay árboles libres en esta zona","No available trees in this area"));
       dirty=true;
     };
-    const onFindAnimals=()=>{if(!baked)return;const a=PEACEFUL_ANIMALS[animalFocusIndex++ % PEACEFUL_ANIMALS.length];const pos=animalAvoidance(a,wildlifeSimulationSeconds,characters);cam.x=pos.x;cam.y=pos.y;cam.zoom=Math.max(cam.zoom,1.35);clampCamera(cam,baked);dirty=true;setWorkNotice(t("Cámara centrada en un animal. Pulsa otra vez para ver el siguiente.","Camera centered on an animal. Tap again for the next."));};
+    const onFindAnimals=()=>{if(!baked)return;const a=PEACEFUL_ANIMALS[animalFocusIndex++ % PEACEFUL_ANIMALS.length];const pos=wildlifeWorldPosition(a,wildlifeSimulationSeconds);cam.x=pos.x;cam.y=pos.y;cam.zoom=Math.max(cam.zoom,1.35);clampCamera(cam,baked);dirty=true;setWorkNotice(t("Cámara centrada en un animal. Pulsa otra vez para ver el siguiente.","Camera centered on an animal. Tap again for the next."));};
     window.addEventListener("azheryn-find-animals",onFindAnimals);
     window.addEventListener("azheryn-log-order",onLogOrder);
     const observer = new ResizeObserver(resize);
