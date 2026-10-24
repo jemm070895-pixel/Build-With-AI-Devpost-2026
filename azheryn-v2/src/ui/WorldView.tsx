@@ -2430,15 +2430,22 @@ export function WorldView() {
         if(selected.length && hitLog && hitLog.distance<=Math.max(fromTouchTap?28:14,12*cam.zoom)){
           if(!stockpile){setWorkNotice(t("Primero coloca la zona de acopio","Place a stockpile first"));return;}
           if(haul?.logId===hitLog.log.id || isQueuedLog(hitLog.log.id)){setWorkNotice(t("Ese tronco ya está en transporte","That log is already being carried"));return;}
-          const available=(ch:FoundingCharacter)=>!ch.needTrip && !ch.order && !isQueuedWorker(ch.id) && (!haul || !haul.workerIds.includes(ch.id));
+          // A direct order from Mui may interrupt ordinary logging, but never an
+          // essential needs trip or an active/queued two-person haul.
+          const available=(ch:FoundingCharacter)=>!ch.needTrip && !isQueuedWorker(ch.id) && !isAnyHauler(ch.id);
           const primary=manualHaulWaitingForLog ? characters.find(ch=>ch.id===manualHaulPrimary && available(ch)) : selected.find(available);
-          if(!primary){setWorkNotice(t("El personaje seleccionado no está disponible","Selected character is unavailable"));return;}
+          if(!primary){setWorkNotice(t("El personaje está atendiendo una necesidad o transportando otro tronco","Character is attending to a need or already carrying another log"));return;}
           const helper=manualHaulWaitingForLog
             ? characters.find(ch=>ch.id===manualHaulHelper && available(ch))
-            : characters.filter(ch=>ch.id!==primary.id && available(ch))
+            : characters.filter(ch=>ch.id!==primary.id && available(ch) && !ch.order)
+              .sort((a,b)=>Math.hypot(a.x-hitLog.log.x,a.y-hitLog.log.y)-Math.hypot(b.x-hitLog.log.x,b.y-hitLog.log.y))[0]
+              ?? characters.filter(ch=>ch.id!==primary.id && available(ch))
               .sort((a,b)=>Math.hypot(a.x-hitLog.log.x,a.y-hitLog.log.y)-Math.hypot(b.x-hitLog.log.x,b.y-hitLog.log.y))[0];
-          if(!helper){setWorkNotice(t("Se necesita otro personaje disponible para cargar el tronco","Another available character is needed to carry this log"));return;}
-          for(const ch of [primary,helper]){recordMuiCommand(ch);ch.resting=false;ch.tx=hitLog.log.x;ch.ty=hitLog.log.y;continuousHaulers.add(ch.id);}
+          if(!helper){setWorkNotice(t("Se necesita otro personaje libre de transporte o necesidades","Another character free from hauling or essential needs is required"));return;}
+          for(const ch of [primary,helper]){
+            if(ch.order){releaseTree(ch);ch.order=undefined;ch.loggingZone=undefined;ch.previousOrder=undefined;}
+            recordMuiCommand(ch);ch.resting=false;ch.tx=hitLog.log.x;ch.ty=hitLog.log.y;continuousHaulers.add(ch.id);
+          }
           manualHaulPrimary=null;manualHaulHelper=null;manualHaulWaitingForLog=false;setCompanionPrompt(false);
           if(haul){
             parallelHauls.push({logId:hitLog.log.id,workerIds:[primary.id,helper.id],destinationX:stockpile.x,destinationY:stockpile.y,active:true,phase:"collecting",originX:hitLog.log.x,originY:hitLog.log.y,stalled:0,lastPositions:{}});
