@@ -11,13 +11,15 @@ export const PEACEFUL_ANIMALS: readonly PeacefulAnimal[] = Object.freeze([
 export function animalPosition(a: PeacefulAnimal, seconds: number): {x:number;y:number} {
   // Each animal traverses a broad, continuous path across the map. The route
   // passes near the clearing periodically, without teleportation or spawning.
-  const speed = a.kind === "bird" ? .009 : a.kind === "rabbit" ? .0045 : .0028;
+  const speed = a.kind === "bird" ? .006 : a.kind === "rabbit" ? .0022 : .0014;
   const t=seconds*speed+a.phase;
-  const rangeX=a.kind === "bird" ? 180 : 145;
-  const rangeY=a.kind === "bird" ? 175 : 140;
+  // Each animal has a distant home territory, away from Mui's central clearing.
+  // Birds roam more broadly; all movement remains continuous and unforced.
+  const rangeX=a.kind === "bird" ? 135 : a.kind === "rabbit" ? 55 : 80;
+  const rangeY=a.kind === "bird" ? 110 : a.kind === "rabbit" ? 45 : 65;
   return {
-    x:Math.sin(t)*rangeX + Math.sin(t*2.3+a.phase)*16,
-    y:Math.sin(t*.73+a.phase*.35)*rangeY + Math.cos(t*1.7)*12,
+    x:a.x * 3.2 + Math.sin(t)*rangeX + Math.sin(t*2.3+a.phase)*12,
+    y:a.y * 3.2 + Math.sin(t*.73+a.phase*.35)*rangeY + Math.cos(t*1.7)*9,
   };
 }
 
