@@ -13,7 +13,7 @@ Build mode: learn
 - [x] 2-scope — contest scope reconciled with V2.
 - [x] 3-prd — V2 PRD updated.
 - [x] 4-spec — V2 technical specification updated.
-- [ ] 5-build — active.
+- [ ] 5-build — playable release accepted; final technical evidence/checklist reconciliation pending.
 - [ ] 6-ship — pending until the contest slice is complete and verified.
 
 ## V2 build metas
@@ -42,10 +42,10 @@ Build mode: learn
 ## Contest polish
 - [ ] Polish from G1 toward G2 where time allows without destabilizing the playable loop.
 - [ ] Prepare a clear 1–3 minute demo path.
-- [ ] Verify public GitHub repository.
+- [x] Verify public GitHub repository (original G6.31.1 source uploaded and core files checked on 2026-10-23).
 - [ ] Verify public repo link is in Devpost “Try it out”.
 - [ ] Prepare submission text.
-- [ ] Explain briefly how the Devpost Learn Skill Pack was used.
+- [x] Record learner's own Skill Pack reflection in FINAL_REVIEW_G6_31_1.md (must still enter it in the Devpost form).
 - [ ] Complete required age-of-majority checkbox.
 - [ ] Prepare/verify demo video and required presentation assets.
 - [ ] Final submission review before October 26, 2026, 5:00 PM ET.
@@ -62,9 +62,9 @@ Earlier prototype history is retained privately.
 - [x] Six Devpost Learn Skill Pack folders present in `.agents/skills/`.
 - [x] Scope, PRD, spec and existing checklist present.
 - [x] Public GitHub repository exists; standalone MIT utility modules published.
-- [ ] Complete 5-build **Final Review** and **Code Tour and App Map** evidence. Do not mark 6-ship complete before these are documented.
+- [x] Record owner acceptance and learning reflection in **Final Review**, and publish technical **Code Tour and App Map**. Detailed mechanical checklist reconciliation remains open; do not mark 6-ship complete.
 - [ ] Check learner-profile.md for private data before public release; inspect git history and intended files for secrets.
-- [ ] Sync audited contest game source; public repository currently does not reflect complete G6.31.1.
+- [x] Sync original contest game source to public repository (owner push confirmed; key source paths checked). Independent public build and complete asset inventory remain unverified.
 - [ ] Publicly accessible short video demonstrating real gameplay. A deployment does not replace the video.
 - [ ] Ensure public repository URL is entered in Devpost's **Try it out** field.
 - [ ] Learner personally writes submission name, description and answers; AI-generated draft is **not** a substitute under the 6-ship skill.
