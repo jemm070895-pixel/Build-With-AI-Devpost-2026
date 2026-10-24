@@ -281,7 +281,8 @@ export function WorldView() {
     // Wildlife paths are local offsets around the map centre, not absolute canvas coordinates.
     // Both rendering and the animal locator must use the same world-space conversion.
     const wildlifeWorldPosition = (animal: (typeof PEACEFUL_ANIMALS)[number], seconds: number) => {
-      const local = animalAvoidance(animal, seconds, characters);
+      const originX = baked?.ox ?? 0, originY = baked?.centerY ?? 0;
+      const local = animalAvoidance(animal, seconds, characters.map(ch => ({ x: ch.x - originX, y: ch.y - originY })));
       return { x: (baked?.ox ?? 0) + local.x, y: (baked?.centerY ?? 0) + local.y, alert: local.alert };
     };
     // Select a real water tile instead of an arbitrary offset. Water is sampled
