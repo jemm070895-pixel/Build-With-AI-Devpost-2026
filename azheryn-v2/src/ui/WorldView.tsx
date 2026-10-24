@@ -3,7 +3,7 @@ import { decodePortableSave, exportPortableSave, installPortableSave } from "../
 import { BACKUP_SUFFIX, readChapterSave, writeChapterSave } from "../world/saveSlots";
 import { recoverStorehouse } from "../world/saveRecovery";
 import { materialPlan, supplyMilestones } from "../world/materialPlanner";
-import { PEACEFUL_ANIMALS, animalAvoidance } from "../world/peacefulWildlife";
+import { PEACEFUL_ANIMALS, animalAvoidance, animalMovementPhase } from "../world/peacefulWildlife";
 import { speciesForIndex, speciesForTree } from "../world/treeSpecies";
 import { fruitForTreeId, fruitPositionsForTreeId, stableTreeSeed } from "../world/treeFruits";
 import { useEffect, useRef, useState } from "react";
@@ -1431,10 +1431,11 @@ export function WorldView() {
         const future = wildlifeWorldPosition(animal, time + .2);
         const facing = future.x >= worldPosition.x ? 1 : -1;
         const motionTime = reduceWildlifeMotion ? 0 : time;
-        const hopping = animal.kind === "rabbit" && !reduceWildlifeMotion ? Math.abs(Math.sin(motionTime * (worldPosition.alert ? 6 : 3.2) + animal.phase)) * 3 : 0;
+        const rabbitPhase = animalMovementPhase(animal, motionTime);
+        const hopping = animal.kind === "rabbit" && rabbitPhase.moving && !reduceWildlifeMotion ? Math.abs(Math.sin(rabbitPhase.eased * Math.PI * 7)) * 2.2 : 0;
         // Birds have a small independent flight altitude; ground shadows stay
         // anchored instead of rising with the animal. Reduced motion freezes bobbing.
-        const flightHeight = animal.kind === "bird" ? 9 + (reduceWildlifeMotion ? 0 : Math.sin(motionTime * 1.8 + animal.phase) * 2) : 0;
+        const flightHeight = animal.kind === "bird" ? 9 + (reduceWildlifeMotion ? 0 : Math.sin(motionTime * .08 + animal.phase) * 3) : 0;
         const bodyLift = hopping + flightHeight;
         ctx.save(); ctx.translate(p.x, p.y - bodyLift * scale); ctx.scale(scale * facing, scale);
         // Contact shadows soften and widen as the animal rises above the ground.
