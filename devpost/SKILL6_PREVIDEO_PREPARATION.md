@@ -1,0 +1,40 @@
+# Skill 6 — submission preparation (technical facts only)
+
+Updated 2026-10-23. **No Devpost form was edited or submitted.**
+
+## Confirmed technical details
+- Working title: AZHERYN V2 — Chapter 1.
+- Public repository: https://github.com/jemm070895-pixel/Build-With-AI-Devpost-2026
+- Source directory: https://github.com/jemm070895-pixel/Build-With-AI-Devpost-2026/tree/main/azheryn-v2
+- Stack: React 19, TypeScript, Vite, browser UI.
+- Contest chapter: Mui and seven guards found a settlement in a forest; gather wood and build the first storehouse.
+- Owner approved G6.31.1 gameplay on Windows and demonstrated a successful local production build on 2026-10-23.
+- Six Devpost Learn skills exist in `.agents/skills/`; 1–5 completed in the project's checklist; 6-ship in progress.
+- Learner's own reflection, verbatim: “Me sirvió para avanzar más organizado dando prioridad al orden”.
+
+## Source material, not submission answers
+- [Scope](scope.md)
+- [PRD](prd.md)
+- [Spec](spec.md)
+- [Checklist](checklist.md)
+- [Final Review](FINAL_REVIEW_G6_31_1.md)
+- [App Map](app-map.html)
+
+The previously AI-written `SUBMISSION_DRAFT_2026-10-23.md` is **not learner-authored** and **must not be pasted as the final Devpost submission**. The 6-ship skill requires the learner to write the project name, short description and other submission responses personally; the assistant may point out gaps and correct spelling/grammar only.
+
+## Pending form fields / actions
+- [ ] Learner-authored short description and other mandatory answers in the actual form.
+- [ ] Exact current Devpost form fields and any video constraints reviewed by the learner; provide screenshots if access is restricted.
+- [ ] Required short video of actual gameplay, publicly accessible.
+- [ ] Enter public repository URL in the form's **Try it out** field.
+- [ ] Complete exit survey and age confirmation if prompted.
+- [ ] Confirm repository history and files contain no exposed credentials/private learner profile. A filename-level or history-wide audit has **not** been completed.
+- [ ] Review and submit before 2026-10-26 5:00 PM ET (2:00 PM Arizona MST).
+
+Optional: deployed playable link, Discord participation, peer feedback. Neither substitutes for video or GitHub.
+
+## Suggested capture checklist for later video (not a script)
+Show real game: introduction → Mui and guards → tree selection and cutting → wood hauling/stockpile → construction → storehouse completion/epilogue. Do not expose passwords, personal files, desktop notifications or unrelated windows.
+
+## Shipping status
+Game original uploaded, local build and owner gameplay accepted, skills 1–5 closed. Skill 6 remains open until learner-authored form, required video, exit survey and actual Devpost submission are completed.
