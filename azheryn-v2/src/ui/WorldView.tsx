@@ -1426,7 +1426,8 @@ export function WorldView() {
         const worldPosition = wildlifeWorldPosition(animal, time);
         const p = toScreen(worldPosition);
         if (p.x < -45 || p.x > width + 45 || p.y < -45 || p.y > height + 45) continue;
-        const scale = Math.max(.85, Math.min(2, cam.zoom));
+        // Keep animals noticeably smaller than humans at the same camera zoom.
+        const scale = Math.max(.32, Math.min(.95, cam.zoom * .48));
         const future = wildlifeWorldPosition(animal, time + .2);
         const facing = future.x >= worldPosition.x ? 1 : -1;
         const motionTime = reduceWildlifeMotion ? 0 : time;
