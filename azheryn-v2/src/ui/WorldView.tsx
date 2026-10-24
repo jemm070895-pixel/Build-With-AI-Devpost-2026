@@ -278,12 +278,11 @@ export function WorldView() {
     const project = (u: number, v: number) => ({ x: (u - v) * 14 + (baked?.ox ?? 0), y: (u + v) * 13 + (baked?.oy ?? 0) - 24 });
     const toScreen = (p: {x:number;y:number}) => ({ x: (p.x - cam.x) * cam.zoom + width / 2, y: (p.y - cam.y) * cam.zoom + height / 2 });
     const insideWorld = (x:number,y:number) => baked ? {x:clamp(x,0,baked.width),y:clamp(y,0,baked.height)} : {x,y};
-    // Wildlife paths are local offsets around the map centre, not absolute canvas coordinates.
-    // Both rendering and the animal locator must use the same world-space conversion.
+    // Wildlife positions are local offsets from the world center; map them into canvas world coordinates.
     const wildlifeWorldPosition = (animal: (typeof PEACEFUL_ANIMALS)[number], seconds: number) => {
       const originX = baked?.ox ?? 0, originY = baked?.centerY ?? 0;
       const local = animalAvoidance(animal, seconds, characters.map(ch => ({ x: ch.x - originX, y: ch.y - originY })));
-      return { x: (baked?.ox ?? 0) + local.x, y: (baked?.centerY ?? 0) + local.y, alert: local.alert };
+      return { x: originX + local.x, y: originY + local.y, alert: local.alert };
     };
     // Select a real water tile instead of an arbitrary offset. Water is sampled
     // from the generated terrain; food remains a separate pending system.
@@ -738,6 +737,34 @@ export function WorldView() {
         const buildPulse = building ? Math.sin(phase*.55 + Number(ch.id.replace(/\D/g, ""))) : 0;
         const swing = working ? Math.sin(phase * 0.75) : 0;
         const facing = Math.abs(ch.tx-ch.x) > .2 ? Math.sign(ch.tx-ch.x) : 1;
+        // G6.31.9: sleeping pose only after reaching the nighttime camp slot.
+        // No new sprite, asset or AI state; this is a lightweight Canvas pose.
+        const atNightCamp = !ch.mui && campfire !== null && isNight(characterSun.hour) &&
+          !ch.order && !ch.manualMove && !ch.needTrip && !hauling &&
+          Math.hypot(ch.tx-ch.x, ch.ty-ch.y) < 1.1 &&
+          Math.hypot(ch.x-campfire.x, ch.y-campfire.y) < 17;
+        if (atNightCamp) {
+          const breath = reducedMotionFrame ? 0 : Math.sin(phase*.14 + Number(ch.id.replace(/\D/g, ""))) * .35;
+          const guardIndex = Math.max(0, Number(ch.id.replace(/\D/g, "")) - 1);
+          const sleepingTunics = ["#514840", "#5b5047", "#41484b", "#5d4a3d", "#4a403b", "#655449", "#53463d"];
+          ctx.save();
+          // A modest ground mat distinguishes sleep from standing idle.
+          ctx.fillStyle = "rgba(52,43,30,.72)";
+          ctx.beginPath();ctx.ellipse(s.x,s.y-2*z,16*z,6*z,-.15,0,Math.PI*2);ctx.fill();
+          ctx.strokeStyle = "rgba(164,141,100,.6)";ctx.lineWidth=Math.max(.6,z*.6);ctx.stroke();
+          // Sideways body, head on a small rolled-cloth pillow, closed eyes.
+          ctx.fillStyle = sleepingTunics[guardIndex%7];
+          ctx.beginPath();ctx.ellipse(s.x+1*z,s.y-3*z,(9+breath)*z,3.5*z,-.1,0,Math.PI*2);ctx.fill();
+          ctx.strokeStyle="#342a25";ctx.lineWidth=Math.max(1,2*z);
+          ctx.beginPath();ctx.moveTo(s.x+7*z,s.y-3*z);ctx.lineTo(s.x+13*z,s.y-2*z);ctx.stroke();
+          ctx.fillStyle="#8d765e";ctx.fillRect(s.x-12*z,s.y-7*z,5*z,6*z);
+          ctx.fillStyle="#bd9270";ctx.beginPath();ctx.ellipse(s.x-9*z,s.y-4*z,3.5*z,3*z,0,0,Math.PI*2);ctx.fill();
+          ctx.strokeStyle="#352721";ctx.lineWidth=Math.max(.7,.8*z);
+          ctx.beginPath();ctx.moveTo(s.x-11*z,s.y-4*z);ctx.lineTo(s.x-8*z,s.y-4*z);ctx.stroke();
+          if(ch.selected){ctx.strokeStyle="#e4f0ce";ctx.lineWidth=2;ctx.beginPath();ctx.ellipse(s.x,s.y+3*z,17*z,7*z,0,0,Math.PI*2);ctx.stroke();}
+          ctx.restore();
+          continue;
+        }
         const line = (x1:number,y1:number,x2:number,y2:number,color:string,w:number) => {
           ctx.strokeStyle=color; ctx.lineWidth=Math.max(1,w*z);ctx.lineCap="round";
           ctx.beginPath();ctx.moveTo(s.x+x1*z,s.y+y1*z);ctx.lineTo(s.x+x2*z,s.y+y2*z);ctx.stroke();
@@ -2066,6 +2093,36 @@ export function WorldView() {
           }
           // At night autonomous duties pause. A direct order from Mui remains valid.
           // Survival trips above retain priority; fatigue recovery continues below.
+          // G6.31.8: after 22:00, idle guards walk to individual sleeping
+          // positions near the existing campfire. No new building is required.
+          // Explicit orders, manual movement and survival trips take priority.
+          if (!ch.mui && campfire && (frameClimate.hour >= 22 || frameClimate.hour < 6) &&
+              !ch.manualMove && !ch.order && !ch.needTrip && !isAnyHauler(ch.id)) {
+            const guardIndex = characters.filter(c => !c.mui).findIndex(c => c.id === ch.id);
+            const angle = (guardIndex / 7) * Math.PI * 2 - Math.PI / 2;
+            const sleepingPlace = insideWorld(campfire.x + Math.cos(angle) * 12, campfire.y + Math.sin(angle) * 10);
+            const distance = Math.hypot(sleepingPlace.x - ch.x, sleepingPlace.y - ch.y);
+            if (distance > 1.1) {
+              ch.tx = sleepingPlace.x; ch.ty = sleepingPlace.y;
+              const step = Math.min(distance, CHARACTER_SPEED * dt);
+              const safe = moveAroundFinishedStorehouse(ch, ch.x + (sleepingPlace.x-ch.x)/distance*step, ch.y + (sleepingPlace.y-ch.y)/distance*step);
+              ch.x = safe.x; ch.y = safe.y; moving = true; dirty = true;
+            } else {
+              ch.tx = ch.x; ch.ty = ch.y;
+            }
+            if (distance <= 1.1) {
+              if (ch.fatigue) ch.fatigue = recoverFatigue(ch.fatigue, dt);
+              ch.socialRestSeconds = (ch.socialRestSeconds ?? 0) + dt;
+              if (ch.socialRestSeconds >= 60) {
+                const minutes = Math.floor(ch.socialRestSeconds / 60);
+                ch.socialRestSeconds -= minutes * 60;
+                ch.social = restSocialState(ch.social ?? initialSocialState(), minutes / 60);
+              }
+            } else {
+              ch.socialRestSeconds = 0;
+            }
+            continue;
+          }
           if (shouldPauseAutonomousWork(frameClimate.hour, Boolean(ch.order) || Boolean(ch.manualMove) || Boolean(isAnyHauler(ch.id)))) {
             // Hauling is still work until cancelled. Do not award social rest
             // for the same simulation tick that terminates a haul assignment.
@@ -2413,8 +2470,19 @@ export function WorldView() {
         if(campfireModeRef.current){const wx=cam.x+(mx-width/2)/cam.zoom,wy=cam.y+(my-height/2)/cam.zoom;campfire=insideWorld(wx,wy);setCampfirePlaced(true);campfireModeRef.current=false;setCampfireMode(false);setWorkNotice("Fogata colocada; se encenderá por la noche");dirty=true;return;}
         if(buildingModeRef.current){const wx=cam.x+(mx-width/2)/cam.zoom,wy=cam.y+(my-height/2)/cam.zoom;const q=insideWorld(wx,wy);if(storehouse){setWorkNotice("Ya existe una obra de almacén");buildingModeRef.current=false;setBuildingMode(false);return;}storehouse={...createStorehouseSite(q.x,q.y),turned:storehouseTurnedRef.current};buildingModeRef.current=false;setBuildingMode(false);setBuildingProgress({committed:0,complete:false,placed:true});setWorkNotice("Obra marcada: 91 troncos del acopio y NPC disponibles");dirty=true;return;}
         if(stockpileModeRef.current){loggingTargetRef.current=null;setLoggingTarget(null);const wx=cam.x+(mx-width/2)/cam.zoom,wy=cam.y+(my-height/2)/cam.zoom;if(haul)cancelHaul();const q=insideWorld(wx,wy);const margin=28;stockpile=createOutdoorStockpile(baked?clamp(q.x,Math.min(margin,baked.width/2),Math.max(margin,baked.width-margin)):q.x,baked?clamp(q.y,Math.min(margin,baked.height/2),Math.max(margin,baked.height-margin)):q.y);felledLogs.filter(log=>log.stockpiled).forEach((log,index)=>{const slot=stockpileSlot(stockpile!,index);log.x=slot.x;log.y=slot.y;});stockpileModeRef.current=false;setStockpileMode(false);setWorkNotice("Zona de acopio marcada");dirty=true;return;}
-        let hit: FoundingCharacter | undefined; let best=fromTouchTap ? 32 : 18;
-        for(const ch of characters){const s=toScreen(ch); const d=Math.hypot(mx-s.x,my-s.y); if(d<best){best=d;hit=ch;}}
+        // The projected character position is at the feet. Include the full
+        // visible figure (head, torso, arms and legs) in the selection area.
+        // Use screen pixels so clicking remains usable at different zoom levels.
+        let hit: FoundingCharacter | undefined; let best=Number.POSITIVE_INFINITY;
+        for(const ch of characters){
+          const s=toScreen(ch);
+          const bodyHeight=Math.max(28,42*cam.zoom);
+          const halfWidth=Math.max(fromTouchTap?22:15,17*cam.zoom);
+          const dx=Math.abs(mx-s.x), dy=my-s.y;
+          if(dx>halfWidth || dy>Math.max(12,8*cam.zoom) || dy< -bodyHeight)continue;
+          const score=(dx/halfWidth)**2+((dy+bodyHeight*0.48)/(bodyHeight*0.65))**2;
+          if(score<best){best=score;hit=ch;}
+        }
         if(hit){
           if(manualHaulPrimary && !manualHaulHelper && hit.id!==manualHaulPrimary){
             window.dispatchEvent(new CustomEvent("azheryn-squad-individual",{detail:{id:hit.id}}));return;
@@ -2444,8 +2512,8 @@ export function WorldView() {
         if(selected.length && hitLog && hitLog.distance<=Math.max(fromTouchTap?28:14,12*cam.zoom)){
           if(!stockpile){setWorkNotice(t("Primero coloca la zona de acopio","Place a stockpile first"));return;}
           if(haul?.logId===hitLog.log.id || isQueuedLog(hitLog.log.id)){setWorkNotice(t("Ese tronco ya está en transporte","That log is already being carried"));return;}
-          // A direct order from Mui may interrupt ordinary logging, but never an
-          // essential needs trip or an active/queued two-person haul.
+          // Direct orders may preempt logging, but never an essential needs trip
+          // or a log already assigned to a hauling pair.
           const available=(ch:FoundingCharacter)=>!ch.needTrip && !isQueuedWorker(ch.id) && !isAnyHauler(ch.id);
           const primary=manualHaulWaitingForLog ? characters.find(ch=>ch.id===manualHaulPrimary && available(ch)) : selected.find(available);
           if(!primary){setWorkNotice(t("El personaje está atendiendo una necesidad o transportando otro tronco","Character is attending to a need or already carrying another log"));return;}
@@ -2840,12 +2908,12 @@ export function WorldView() {
             <dt>1 / 2 / 3 / 0</dt><dd>{t("Mui / guardias / todos / limpiar selección","Mui / guards / everyone / clear selection")}</dd>
             <dt>M / T</dt><dd>{t("Preparar orden de mover / talar","Prepare move / logging order")}</dd>
             <dt>Espacio / Esc</dt><dd>{t("Pausar o reanudar / cancelar orden pendiente","Pause or resume / cancel pending order")}</dd>
-            <dt>{t("Clic / Shift + clic","Click / Shift + click")}</dt><dd>{t("Seleccionar / añadir o quitar unidades","Select / add or remove units")}</dd>
+            <dt>{t("Clic / Shift + clic","Click / Shift + click")}</dt><dd>{t("Seleccionar tocando cabeza, torso o piernas / añadir o quitar unidades","Select by clicking head, torso or legs / add or remove units")}</dd>
             <dt>{t("Shift + arrastrar","Shift + drag")}</dt><dd>{t("Seleccionar un grupo en un rectángulo","Select a group in a rectangle")}</dd>
             <dt>{t("Arrastrar / rueda","Drag / wheel")}</dt><dd>{t("Mover cámara / zoom","Pan camera / zoom")}</dd>
           </dl>
           <h3>{t("Teléfono · Pantalla táctil","Phone · Touch screen")}</h3>
-          <p>{t("Toca un personaje para seleccionarlo. Arrastra el mapa para mover la cámara. Usa los botones visibles para seleccionar guardias, mover, talar, construir y pausar. En Construcción marca primero el acopio y después el almacén.","Tap a character to select. Drag the map to pan the camera. Use the on-screen buttons to select guards, move, log, build and pause. In Construction, place the stockpile first, then the storehouse.")}</p>
+          <p>{t("Toca cualquier parte del cuerpo del personaje (cabeza, torso o piernas) para seleccionarlo. Arrastra el mapa para mover la cámara. Usa los botones visibles para seleccionar guardias, mover, talar, construir y pausar. En Construcción marca primero el acopio y después el almacén.","Tap a character anywhere on their body (head, torso or legs) to select. Drag the map to pan the camera. Use the on-screen buttons to select guards, move, log, build and pause. In Construction, place the stockpile first, then the storehouse.")}</p>
           <p>{t("Objetivo del capítulo: talar árboles, transportar los troncos en parejas y construir el almacén con 91 troncos.","Chapter goal: fell trees, transport logs in pairs and build the storehouse with 91 logs.")}</p>
         </section>
       </div>}
