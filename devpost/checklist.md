@@ -173,3 +173,9 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - Root `.gitignore` explicitly ignores `.env` and `.env.*` except `.env.example`.
 - `.env` query matches are references in docs/source, not by themselves evidence of a committed environment file.
 - **Limitation:** attempted full Git clone from the execution container failed because outbound DNS could not resolve `github.com`. A complete historical blob scan, branch inventory and dependency vulnerability scan have **not** been completed. Do not mark repository security 100% certified. Recommend enabling GitHub secret scanning and push protection where available, and scanning all history locally before final security signoff.
+
+## Commit and branch audit expansion — 2026-10-25
+- GitHub commit search returned **98 recent commit records** in the accessible repository; this is a result count, not proof of exhaustive history enumeration.
+- Branch search returned **35 branches**: `main`, 17 dated `lec/laboratorio-*` branches and 17 dated `lec/respaldo-*` branches (Oct 8–24). A branch-history exposure review must include these, not only main.
+- Fetched and inspected diffs for the **eight most recent commits** (`e1f8685a`, `f798ec7f`, `ee0c7f1a`, `d8e432d9`, `b3a8a25e`, `bd75bdd6`, `f77b5bf2`, `ea3b5d6f`). No exact-pattern private-key delimiters, `ghp_`/`github_pat_` tokens or AWS AKIA identifiers detected in those eight diffs. This is not a scan of all 98 commits or all branches.
+- An attempted larger batch exceeded connector call limits. Historical scanning remains incomplete. Do not claim full certification or 100% completion.
