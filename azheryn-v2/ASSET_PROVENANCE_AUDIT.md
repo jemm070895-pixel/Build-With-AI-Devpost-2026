@@ -120,3 +120,18 @@ Compared the original G6.31.1 and later G6.31.19 release archives mounted in the
 Also verified `public/sw.js` exists; it is not a media asset.
 
 **Result: 22/22 known image files found in GitHub.** This completes the *known-release-assets presence check*. It does **not** complete a recursive current-repository inventory: a full Git tree listing was not available from the connected file reader, so unknown additional files cannot be ruled out. No claim of independent third-party-rights clearance is made.
+
+## Provenance chain reconstruction — 2026-10-24 (pending item 2)
+**Evidence type:** project documentation and owner testimony; not original image-generation session metadata.
+
+| Asset family | Documented origin and derivation | Confidence / remaining gap |
+| --- | --- | --- |
+| Fehe design | Owner states the design is entirely their creation, specified for ChatGPT illustration. Canonical source `public/intro/Fehe_original.jpeg`; project docs specify 13 blade points and guard Fehe dimensions 17 cm blade + 13 cm handle = 30 cm. Mui variant 25 + 15 = 40 cm. | Originality of design is owner testimony; exact generation prompts, tool output and external inputs have not been independently recovered. |
+| Fehe corrected labels | `FEHE_ROTULACION_CORREGIDA_2026-10-22.md` says `public/intro/Fehe_canonica_30cm.jpeg` changed dimension labels only, leaving the underlying depicted handle proportions unchanged. | Do not claim the image was geometrically rebuilt or exact to the dimensions. |
+| Fehe handoff scene | `FEHE_ENTREGA_G6_31_12.md` says the weapon was directly cropped from the approved `Fehe_original.jpeg`, not newly invented; scene is a narrative composite. `PROLOGO_G6_31_19.md` records cache-busted `entrega_fehe_g63119_limpia.webp` used in two slides. | Background and all intermediate image editing inputs not independently examined. |
+| Founder characters | `PERSONAJES_G3_REFERENCIA_2026-10-22.md` says eight portraits (Mui and seven guards) were extracted from `public/characters/REFERENCIA_PERSONAJES.webp`, then used for squad panel and stylized canvas palettes. | The original sheet is present; its generating prompts/reference uploads are not in the reviewed records. |
+| Remaining prologue illustrations | Owner states ChatGPT generated the other illustrations from their directions. The 22 known image files are all present in GitHub. | Per-image original generation sessions and external reference inputs not independently recovered. |
+
+**Important discrepancy retained, not silently resolved:** `PERSONAJES_G3_REFERENCIA_2026-10-22.md` calls `assets/fotos_y_bocetos/Fehe.jpeg` the canonical reference, whereas later `FEHE_REFERENCIA_OFICIAL_2026-10-22.md` names `public/intro/Fehe_original.jpeg` as the single official image. `FEHE_ROTULACION_CORREGIDA_2026-10-22.md` says the original photo exists at both paths. These documents support an internal reference chain but do not prove identical file hashes. A historical alternative `fehe_mui_entrega.webp` was expressly rejected and should not be reinstated.
+
+**Outcome:** Known derivation chains documented and linked to source files. No third-party source identified in these documents. Full individual image-generation provenance and rights clearance remain **unverified**, so pending item 2 is **documented, not independently closed**. No game files changed.
