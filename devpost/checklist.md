@@ -256,3 +256,11 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - Queried the repository rulesets API: empty list `[]`. Branch-protection endpoint returned HTTP 403 `Resource not accessible by integration`; protection status cannot be independently established from this connection.
 - Latest workflow run for documentation commit `6d6a2e4f21766bf84dfc5d13ff5b8f26ac0b8bc9` was `completed/success` (`AA - Auditoria universal segura`, run 40176155649). Inspected its workflow definition: it inventories files and checks selected CSVs, but does **not** perform `npm audit`, secret scanning, dependency CVE scanning, or comprehensive code security testing. Its success is not a clean security audit.
 - **Security status: NOT 100% VERIFIED.** The earlier 97% was a progress estimate, not a quantified security assurance. Remaining blockers: execute `npm audit` for both projects, assess/patch Vite and retest; scan full commit history and all relevant files for secrets; verify branch protection and secret scanning with an account possessing permissions; perform reproducible clean build and code/dependency checks. Preserve submitted version unless explicitly authorized to modify.
+
+
+## Security audit — both lockfiles integrity/origin check (2026-10-25)
+- Parsed both lockfile v3 inventories from current default branch: `azheryn-v2` **49** package entries and `azheryn-app` **71** entries (120 combined entries, not necessarily 120 unique packages).
+- For both inventories: **zero** downloaded package entries missing `integrity`; **zero** `resolved` download URLs outside `https://registry.npmjs.org/`.
+- Both inventories declare `hasInstallScript` only for `node_modules/fsevents` (optional macOS filesystem dependency); this is not an executable script audit.
+- Both inventories lock `vite@8.3.2`, previously identified as affected by advisories fixed in 8.3.3. No package updates or build execution performed.
+- Attempted isolated shallow clone for deeper local testing, but runtime cannot resolve `github.com`; therefore `npm audit`, history scan and local build remain unexecuted. Do not label this as 100% security verified.
