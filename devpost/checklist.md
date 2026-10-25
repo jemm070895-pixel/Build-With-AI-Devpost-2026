@@ -166,3 +166,10 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - Eligibility boxes are confirmed checked; truth of underlying eligibility and precise Skill Pack usage cannot be independently proven by screenshots. The explanation field visibly begins `I used the Devpost Learn Skill Pack to define scope, write planning documents, organize requireme...`.
 - One question `¿Cuál de estos usaste realmente?` is answered `Ninguno`, while the public Built With tags include ChatGPT and GitHub Copilot. This could be different category options, so do **not** assert inconsistency without viewing the selectable options.
 - Final technical security audit remains limited: prior indexed secret search and `.gitignore` checks are not a full commit-history or dependency scan. No claim of comprehensive security certification.
+
+## Current default-branch indexed secret check — 2026-10-25
+- Searched GitHub's default-branch code index for `sk_live_`, `ghp_`, `github_pat_`, `AKIA`, `PAYPAL_API_KEY`, `OPENAI_API_KEY`, and `password=`: **zero indexed results** for each. These are targeted searches, not proof of absence of secrets.
+- Search for `BEGIN PRIVATE KEY` returned two hits, but direct inspection of both current file contents (`devpost/checklist.md`, `azheryn-v2/src/ui/IntroStory.tsx`) showed **no actual private-key delimiter**. Treat as search-index false positives/approximate matches, not a discovered secret.
+- Root `.gitignore` explicitly ignores `.env` and `.env.*` except `.env.example`.
+- `.env` query matches are references in docs/source, not by themselves evidence of a committed environment file.
+- **Limitation:** attempted full Git clone from the execution container failed because outbound DNS could not resolve `github.com`. A complete historical blob scan, branch inventory and dependency vulnerability scan have **not** been completed. Do not mark repository security 100% certified. Recommend enabling GitHub secret scanning and push protection where available, and scanning all history locally before final security signoff.
