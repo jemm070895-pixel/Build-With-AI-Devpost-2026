@@ -57,7 +57,3 @@
 .azh-language-gate button{font:inherit;font-size:22px;color:#fff2d3;background:#22394b;border:2px solid #bd9c63;border-radius:12px;padding:17px 36px;cursor:pointer;min-width:165px}
 .azh-language-gate button:focus-visible{outline:3px solid white;outline-offset:4px}
 
-/* English caption replaces Spanish lettering embedded in the approved image, without editing the Fehe artwork. */
-.azh-fehe-english-label{position:absolute;z-index:2;left:21%;top:58%;width:39%;min-height:21%;box-sizing:border-box;padding:8px 10px;background:rgba(13,22,25,.94);color:#fff3d3;display:flex;flex-direction:column;justify-content:center;gap:3px;pointer-events:none;font:clamp(9px,1.35vw,17px)/1.25 Georgia,serif;text-shadow:0 1px 2px #000;}
-.azh-fehe-english-label strong{font-size:1.05em;letter-spacing:.02em}.azh-fehe-english-label span{font-size:.8em;}
-@media(max-width:600px){.azh-fehe-english-label{left:19%;top:57%;width:44%;padding:3px 5px;font-size:clamp(7px,2vw,11px);}}
