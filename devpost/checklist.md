@@ -93,3 +93,10 @@ Peer feedback, Discord posts and live deployment are **optional** per the instal
 ## Revisions
 - 2026-10-23: Retrospectively reconciled the legacy G1/G3 checklist with the owner-approved G6.31.1 release without fabricating historical per-slice checks.
 - 2026-10-23: Public original game upload verified; technical suite still requires classification and a reproducible build. Do not mark Skill 5 complete solely because the game launched successfully.
+
+## Post-submission evidence update — 2026-10-24
+- [x] Owner reports final Devpost submission sent and YouTube gameplay video published (2:59, unlisted); independently verifying the URLs remains open.
+- [x] Owner supplied screenshot of the game running from the GitHub-downloaded Windows checkout, with English UI and playable map; owner reported everything worked.
+- [ ] Audit each published image/media file for origin, generation method, third-party rights, and permitted public redistribution. ASSET_RIGHTS.md is a scope notice, not provenance proof.
+- [ ] Independently verify submitted Devpost page and linked demo video.
+- [ ] Close Skill 6 only after its remaining required evidence and learner-owned tasks are confirmed; do not claim completion based solely on submission.
