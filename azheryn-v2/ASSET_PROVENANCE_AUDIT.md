@@ -54,3 +54,8 @@ The following names were extracted from the live GitHub `src/ui/IntroStory.tsx` 
 
 ### Inventory limitations
 The connected GitHub file reader can read known paths but does not enumerate folders. A full list of binaries, fonts, audio and video is therefore **not verified** by this partial audit. The expected `.webp` names above are derived from image keys and the intro's file-loading convention; individual binary contents and generation histories have not been inspected. Do not claim complete inventory or rights clearance.
+
+## Additional live-code asset references — 2026-10-24
+The live `src/ui/WorldView.tsx` also references `/characters/mui.webp` and dynamically generated `/characters/guard-${i}.webp` paths. These correspond to the founder portrait and guard portraits in the squad interface. The dynamic guard index range and actual file existence were not established by this pass, so a numeric count is intentionally not asserted. The source code also uses Canvas rendering, which does not necessarily require external image files for every visual element.
+
+**Scope note:** Both `IntroStory.tsx` and `WorldView.tsx` have now been scanned for explicit media file references. This is not a recursive inventory of `public/`, and no image pixels, metadata, external reference images, or prompt histories were examined. Full media-rights clearance remains pending.
