@@ -107,6 +107,9 @@ export function WorldView() {
   const [showPlan, setShowPlan] = useState(false);
   const [showGuide, setShowGuide] = useState(false);
   const [showSquad, setShowSquad] = useState(false);
+  // Display-only snapshot: fatigue comes from the same simulation profiles used by the guards.
+  const [guardStatus, setGuardStatus] = useState<Array<{id:string; tired:number; resting:boolean; busy:boolean; need:string | null; selected:boolean}>>([]);
+
   const [squadChosen, setSquadChosen] = useState<string | null>(null);
   const [companionPrompt, setCompanionPrompt] = useState(false);
   const [showControls, setShowControls] = useState(false);
@@ -739,7 +742,7 @@ export function WorldView() {
         const facing = Math.abs(ch.tx-ch.x) > .2 ? Math.sign(ch.tx-ch.x) : 1;
         // G6.31.9: sleeping pose only after reaching the nighttime camp slot.
         // No new sprite, asset or AI state; this is a lightweight Canvas pose.
-        const atNightCamp = !ch.mui && campfire !== null && isNight(characterSun.hour) &&
+        const atNightCamp = !ch.mui && campfire !== null && (characterSun.hour >= 22 || characterSun.hour < 6) &&
           !ch.order && !ch.manualMove && !ch.needTrip && !hauling &&
           Math.hypot(ch.tx-ch.x, ch.ty-ch.y) < 1.1 &&
           Math.hypot(ch.x-campfire.x, ch.y-campfire.y) < 17;
@@ -1967,6 +1970,14 @@ export function WorldView() {
       climateSnapshotElapsed += elapsed;
       if (climateSnapshotElapsed >= 0.5) {
         climateSnapshotElapsed %= 0.5;
+        setGuardStatus(characters.map(ch=>({
+          id:ch.id,
+          selected:ch.selected,
+          tired:ch.fatigue ? Math.max(0,Math.min(100,Math.round(ch.fatigue.fatigue/Math.max(1,ch.fatigue.fatigueLimit)*100))) : 0,
+          resting:Boolean(ch.resting),
+          busy:Boolean(ch.order || isAnyHauler(ch.id)),
+          need:ch.needTrip?.kind ?? null
+        })));
         setLogsCount({total:felledLogs.filter(l=>!l.usedForStorehouse).length,outdoor:felledLogs.filter(l=>l.stockpiled&&!l.usedForStorehouse).length,waiting:felledLogs.filter(l=>!l.stockpiled&&!l.usedForStorehouse).length,stockpilePlaced:Boolean(stockpile),hauling:Boolean(haul?.active),busyGuards:characters.filter(ch=>!ch.mui && (Boolean(ch.order)||Boolean(ch.treeId))).length,loggers:characters.filter(ch=>!ch.mui && (Boolean(ch.treeId)||ch.order?.kind==="logging")).length,builders:storehouse&&!storehouse.complete?characters.filter(ch=>!ch.mui&&!ch.resting&&!ch.needTrip&&!ch.order&&!isAnyHauler(ch.id)&&Math.hypot(ch.x-storehouse!.x,ch.y-storehouse!.y)<=8).length:0,collecting:characters.filter(ch=>!ch.mui&&Boolean(isAnyHauler(ch.id))).length});
         if (storehouse) setBuildingProgress({committed:storehouse.committed,complete:storehouse.complete,placed:true});
         if (dt > 0) {
@@ -3036,6 +3047,16 @@ export function WorldView() {
         <strong>{t("Personajes","Characters")} · {selection.count}/8</strong>
         <small>{t("Atajos: 1 Mui · 2 guardias · 3 todos · 0 ninguno · M mover · T talar · H centrar Mui · +/- zoom · Espacio pausa · Esc cancelar", "Shortcuts: 1 Mui · 2 guards · 3 all · 0 clear · M move · T log · H center Mui · +/- zoom · Space pause · Esc cancel")}</small>
         <span>{selection.mui ? "Mui · " : ""}{selection.guards} {t("guardias seleccionados","guards selected")}</span>
+        <p className="azh-fatigue-help">{t("Cansancio: 0 % = descansado, 100 % = agotado. Si un guardia no responde, puede estar descansando, ocupado, atendiendo sus necesidades o fuera de su jornada nocturna.","Fatigue: 0% = rested, 100% = exhausted. A guard may not respond because they are resting, busy, meeting basic needs, or off duty at night.")}</p>
+        {selection.count === 0 && <small>{t("Selecciona a Mui o a un guardia para consultar su cansancio.","Select Mui or a guard to view fatigue.")}</small>}
+        <div className="azh-fatigue-list" aria-label={t("Cansancio individual de los guardias","Individual guard fatigue")}>
+          {guardStatus.filter(g=>g.selected).map(g=><div className="azh-fatigue-row" key={g.id}>
+            <span>{g.id === "mui" ? "Mui" : `${t("Guardia","Guard")} ${g.id.replace("guard-","")}`}</span>
+            <meter min={0} max={100} value={g.tired} aria-label={t("Cansancio","Fatigue")}/>
+            <strong>{g.tired}%</strong>
+            <small>{g.resting ? t("Descansando","Resting") : g.need ? t("Necesidad básica","Basic need") : g.tired>=100 ? t("Agotado","Exhausted") : g.busy ? t("Ocupado","Busy") : t("Disponible","Available")}</small>
+          </div>)}
+        </div>
         <div className="founding-portraits" aria-label={t("Retratos de Mui y los siete guardias", "Portraits of Mui and the seven guards")}>
           {Array.from({length:8},(_,i)=><figure key={i} className="founding-portrait" onClick={()=>window.dispatchEvent(new CustomEvent("azheryn-squad-individual",{detail:{id:i===0?"mui":`guard-${i}`}}))} style={{cursor:"pointer",outline:squadChosen===(i===0?"mui":`guard-${i}`)?"2px solid #f2d7a3":undefined}} role="button" tabIndex={0} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();window.dispatchEvent(new CustomEvent("azheryn-squad-individual",{detail:{id:i===0?"mui":`guard-${i}`}}));}}}>
             <img src={i===0?"/characters/mui.webp":`/characters/guard-${i}.webp`} alt={i===0?"Mui":t(`Guardia ${i}`,`Guard ${i}`)} loading="lazy" />

@@ -461,3 +461,12 @@ button{touch-action:manipulation}
 .azh-victory-future-grid small{font-size:12px;line-height:1.4;margin-top:3px}
 .azh-victory-future .azh-victory-future-note{font-size:12px;color:#e5d5ae;text-align:center}
 @media(max-width:480px){.azh-victory-future-grid{grid-template-columns:1fr}.azh-victory-panel{max-height:94vh}.azh-victory-future{padding:10px}}
+
+
+/* G6.31.15 — compact guard fatigue panel */
+.azh-fatigue-help {font-size: .78rem;line-height:1.35;opacity:.9;margin:.45rem 0;}
+.azh-fatigue-list {display:grid;gap:4px;max-height:190px;overflow-y:auto;margin:6px 0;padding-right:4px;}
+.azh-fatigue-row {display:grid;grid-template-columns:minmax(70px,1fr) minmax(55px,1.3fr) 42px minmax(72px,1fr);align-items:center;gap:6px;font-size:.78rem;}
+.azh-fatigue-row meter {width:100%;height:12px;}
+.azh-fatigue-row strong {font-variant-numeric:tabular-nums;text-align:right;}
+.azh-fatigue-row small {font-size:.72rem;opacity:.9;}
