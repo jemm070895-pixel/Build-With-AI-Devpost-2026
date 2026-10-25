@@ -248,3 +248,11 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - **Evidence level:** owner attestation in conversation; a post-submit confirmation screen or independent receipt was not reviewed. This resolves the previous *owner-confirmation pending* item, without claiming independent verification.
 - The guided submission and exit-survey steps are reported complete. Security follow-ups (including Vite advisories) remain open and separate.
 - No changes to game code, license, assets, or Devpost submission.
+
+
+## Security audit continuation — 2026-10-25 (read-only verification)
+- Queried GitHub's recursive `main` tree: **548 entries**, `truncated=false`. No paths resembling `.env`, private keys, passwords or credentials were present in the enumerated tree. This is a filename check, not a content or historical secret scan.
+- Identified **two** Vite lockfiles using `vite@8.3.2`: `azheryn-v2/package-lock.json` (49 package entries, previously audited) and `azheryn-app/package-lock.json` (71 package entries). Both need advisory remediation assessment; do not change submitted source without owner approval.
+- Queried the repository rulesets API: empty list `[]`. Branch-protection endpoint returned HTTP 403 `Resource not accessible by integration`; protection status cannot be independently established from this connection.
+- Latest workflow run for documentation commit `6d6a2e4f21766bf84dfc5d13ff5b8f26ac0b8bc9` was `completed/success` (`AA - Auditoria universal segura`, run 40176155649). Inspected its workflow definition: it inventories files and checks selected CSVs, but does **not** perform `npm audit`, secret scanning, dependency CVE scanning, or comprehensive code security testing. Its success is not a clean security audit.
+- **Security status: NOT 100% VERIFIED.** The earlier 97% was a progress estimate, not a quantified security assurance. Remaining blockers: execute `npm audit` for both projects, assess/patch Vite and retest; scan full commit history and all relevant files for secrets; verify branch protection and secret scanning with an account possessing permissions; perform reproducible clean build and code/dependency checks. Preserve submitted version unless explicitly authorized to modify.
