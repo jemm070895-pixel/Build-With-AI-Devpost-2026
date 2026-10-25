@@ -212,3 +212,11 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - `.gitignore` contains `.env` and `.env.*` patterns and ignores `devpost/learner-profile.md`, but ignore rules do not erase already committed history. No GitHub branch-protection or secret-scanning settings could be verified with the currently available connector actions.
 - Combined commit status API for the documentation update returned an empty status list; this does **not** establish that all GitHub Actions checks passed or failed. No `npm audit` execution or vulnerability advisory result has been obtained.
 - Security recommendation only; no release code, license, assets or submission changed.
+
+
+## Security audit — dependency advisory finding (2026-10-25)
+- Read `azheryn-v2/package-lock.json` (lockfile v3): 49 package entries; all recorded `resolved` URLs use `https://registry.npmjs.org/`; all downloadable entries with a `resolved` URL have integrity metadata. One optional `fsevents` package declares an install script. These are supply-chain inventory checks, not proof that dependencies are free of vulnerabilities.
+- Locked versions include `vite@8.3.2`, `react@19.3.0`, `react-dom@19.3.0`, `typescript@6.0.3`, and `@vitejs/plugin-react@6.1.1`.
+- **Confirmed actionable advisory match:** `vite@8.3.2` is within the affected range for GitHub-reviewed GHSA-rq7h-c2jc-7f22 (file access outside configured allowlist under certain project path conditions; fixed in Vite 8.3.3), and GHSA-9jrq-w75r-8gcw (cross-origin script execution through Vite custom middleware; fixed in Vite 8.3.3). References: https://github.com/advisories/GHSA-rq7h-c2jc-7f22 and https://github.com/advisories/GHSA-9jrq-w75r-8gcw . Both primarily concern development-server exposure; exploitability for this game's configuration has **not** been established.
+- **Recommended post-submission remediation:** update Vite to a currently patched compatible version (at least 8.3.3), regenerate lockfile, run `npm audit`, TypeScript/build/test suite and Windows/mobile smoke tests, and review dev-server exposure. Do not change the submitted game without explicit authorization.
+- Full `npm audit` and GitHub repository secret-scanning/branch-protection status remain unverified. No gameplay, assets, license or Devpost submission changed in this audit.
