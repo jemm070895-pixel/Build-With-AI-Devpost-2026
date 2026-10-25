@@ -121,3 +121,10 @@ This section supersedes older **pending-to-submit** wording above; older entries
 - [ ] Verify remaining learner-owned Skill 6 fields (reflection in submitted form, age/exit survey if required) against the actual submission record before marking 6-ship closed.
 
 **Release rule:** Do not alter accepted Chapter 1 gameplay or replace images solely because generation records are unavailable. Any future claim of full rights clearance requires evidence, not inference.
+
+## Submitted YouTube URL and local video review — 2026-10-24
+Owner provided exact YouTube URL: https://youtu.be/DTPEt2LiVW4 (video ID `DTPEt2LiVW4`). Direct YouTube access through the available web fetch was blocked; independent online playback and verification that the Devpost entry embeds this exact URL remain open.
+
+A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was inspected. FFprobe reports 179.6 seconds, H.264 video at 1916x986 and an AAC audio stream. FFmpeg audio `volumedetect` reports mean and maximum -91.0 dB, consistent with near-silence. Thirteen sampled frames (0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165 and 178 seconds) show AZHERYN V2 title, Fehe/prologue, forest gameplay, NPCs, wood collection and the storehouse. No obvious external stock footage, watermark, or third-party overlay was observed in those sampled frames. This is a sampled visual inspection, not full-frame clearance. The local file has **not** been byte-for-byte or otherwise independently matched to the hosted YouTube video.
+
+**Video pending item 3:** local 2:59 video inspected, with no apparent third-party visual material in sampled frames; online video identity, full frame-by-frame review and any editing project/source materials remain unverified. Do not claim the hosted YouTube video has been directly inspected.
