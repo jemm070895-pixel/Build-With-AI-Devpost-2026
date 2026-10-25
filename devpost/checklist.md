@@ -281,3 +281,11 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - `WorldView.tsx` includes 12 `localStorage` references and one `URL.createObjectURL` reference; `IntroStory.tsx` references both `localStorage` and `sessionStorage`. These are not vulnerabilities by themselves; full data-flow review remains open.
 - `scripts/run-all-tests.cjs` imports `child_process`; test harness process execution is expected, but shell invocation arguments were not exhaustively reviewed.
 - Security status remains open: dependency audit, full content/history secret scan, remediation and dynamic verification are still outstanding. No game code modified.
+
+
+## Security audit — save import/export data-flow review (2026-10-25)
+- Read actual `WorldView.tsx` import/export call sites (lines 41–70). Imported files are checked for size <=8,000,000 bytes, parsed through `decodePortableSave`, confirmed by the player before overwriting local progress, installed with backup preservation, then the page reloads. The exported file is created from validated local save JSON using `Blob` + `URL.createObjectURL`, and the object URL is revoked after one second. No remote upload occurs in this reviewed flow.
+- Manual save snapshot (around lines 266–270) writes character/world progress and camera data to localStorage. No authentication secrets or remote endpoints were evident in this specific path.
+- `IntroStory.tsx` stores language choice in localStorage and intro progress in sessionStorage; this is not evidence of server-side tracking.
+- Caveats: `isUsableChapterSave` does not deeply validate all nested save collections, and the maximum text length does not guarantee bounded nested complexity. Future hardening can enforce per-collection limits, numeric bounds and structural schemas. No exploit demonstrated.
+- Local clone attempt failed DNS resolution of github.com; no `npm audit`, exhaustive historical secret scan or clean local build can be claimed. No application code changed. Audit remains open.
