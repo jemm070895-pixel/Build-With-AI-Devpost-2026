@@ -298,3 +298,11 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - `aa-auditoria-universal.yml` has `contents: read` and `issues: write`; no third-party secret exfiltration code evident in the reviewed YAML. These are static observations, not a dynamic compromise assessment.
 - `scripts/run-all-tests.cjs` invokes Node with an explicit executable and test-file argument array via `spawnSync` (no shell option set), rather than interpolating test filenames into a shell command. No shell-injection sink evident in this reviewed harness.
 - No changes to game, workflow permissions, dependency files, or contest submission. Audit still requires real dependency vulnerability scans, exhaustive history/content checks, branch protection review and tested remediation.
+
+
+## Security audit — automation status and repository controls (2026-10-25)
+- GitHub Actions recent five runs all report `completed/success` for `AA - Auditoria universal segura`, including current documented head `dd8c25bf9aeb15a8c1ba413a094559ea7c76716e`. Its YAML is inventory/CSV validation, not dependency/secret security scanning; passing runs do not close the security audit.
+- GitHub `branches/main` endpoint confirms the expected head commit. The commit metadata says `verification.verified=false` / `reason=unsigned`; unsigned commits are not automatically malicious, but verified signing is not established.
+- GitHub Actions permissions endpoint was rejected by connector allowlist; branch protection endpoint previously returned 403. Do not claim branch permissions or protection verified.
+- Retried local git remote access; host `github.com` cannot resolve in this execution environment. Full local clone, clean build and `npm audit` remain blocked here.
+- No game/source or workflow configuration changed. Outstanding vulnerability and history checks remain explicitly open; 100% certification not supported.
