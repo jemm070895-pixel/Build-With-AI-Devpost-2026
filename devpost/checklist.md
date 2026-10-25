@@ -264,3 +264,11 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - Both inventories declare `hasInstallScript` only for `node_modules/fsevents` (optional macOS filesystem dependency); this is not an executable script audit.
 - Both inventories lock `vite@8.3.2`, previously identified as affected by advisories fixed in 8.3.3. No package updates or build execution performed.
 - Attempted isolated shallow clone for deeper local testing, but runtime cannot resolve `github.com`; therefore `npm audit`, history scan and local build remain unexecuted. Do not label this as 100% security verified.
+
+
+## Security audit — application surface and launcher inspection (2026-10-25)
+- Recursive tree: 505 blobs among 548 tree entries. Filename-pattern inspection found no obvious `.env`, private-key or credentials filenames (generic `tsconfig.json` paths were false-positive matches for `config.json`). Filename-only checks cannot establish absence of embedded credentials.
+- Reviewed `azheryn-v2/public/sw.js`: GET-only, same-origin and scope-restricted service-worker cache logic; no obvious cross-origin interception in reviewed source. Cache-first static assets may remain stale after updates, so a versioned cache change is advisable with a future patched release.
+- Reviewed `src/world/saveTransfer.ts`, `saveRecovery.ts`, `saveSlots.ts`: imported JSON limited to 8,000,000 characters in `decodePortableSave`, guarded by schema checks; storehouse coordinates and progress require finite numbers. `isUsableChapterSave` validates essential character fields but not all nested arrays, lengths or element shapes. This is a **validation-hardening opportunity**, not proof of an exploit.
+- Reviewed `INICIAR_JUEGO_WINDOWS.bat`: local-only `127.0.0.1` dev server; it builds before launch, but launches Vite dev mode, exposing the previously identified development-server advisory to the local host context. `JUGAR_EN_LAPTOP_TABLET_TELEFONO.bat` serves built output through Vite preview bound to `0.0.0.0` for trusted local Wi-Fi and explicitly warns to use private networks. Preview is not a hardened public production server; avoid public/untrusted network exposure.
+- No source, license or launchers changed. No dynamic tests or full-history scans were performed; 100% security certification remains unavailable.
