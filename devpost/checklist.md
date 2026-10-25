@@ -154,3 +154,8 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - Owner followed the **GitHub Repo** link on the Devpost project and photographed the resulting browser page. The visible repository breadcrumb is `jemm070895-pixel / Build-With-AI-Devpost-2026`, with GitHub's **Public** badge.
 - This is direct user-provided visual confirmation that Devpost's GitHub Repo link opens the intended public repository. Mark the project-to-repository destination check **confirmed**.
 - The photo does not establish repository history-wide secret scanning, all private Devpost form responses, or Skill 6 completion; retain those as final audit checks.
+
+## Submitted status confirmed in Devpost edit wizard — owner photo, 2026-10-25
+- Owner's photo of the Devpost `submit-to/30447-build-with-ai-basics/...` edit wizard displays **AZHERYN V2 — Capítulo 1**, green status **ENVIADO** (submitted), and **5 de 5 pasos realizados** (five of five steps completed).
+- Current wizard page is **Detalles del proyecto** with a populated `Sobre el proyecto` Story field in English (begins with `## Inspiration`). This is direct visual confirmation of submitted status and completed wizard steps, not merely an association with the contest.
+- The screenshot does not show the content of all five steps, so exact eligibility answers and any Skill 6/exit survey requirement remain unverified. Continue read-only review of remaining wizard steps; do not resubmit or change fields without necessity.
