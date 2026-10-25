@@ -289,3 +289,12 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - `IntroStory.tsx` stores language choice in localStorage and intro progress in sessionStorage; this is not evidence of server-side tracking.
 - Caveats: `isUsableChapterSave` does not deeply validate all nested save collections, and the maximum text length does not guarantee bounded nested complexity. Future hardening can enforce per-collection limits, numeric bounds and structural schemas. No exploit demonstrated.
 - Local clone attempt failed DNS resolution of github.com; no `npm audit`, exhaustive historical secret scan or clean local build can be claimed. No application code changed. Audit remains open.
+
+
+## Security audit — repository history scope and automation review (2026-10-25)
+- GitHub commits listing: page 1 has 100 entries; page 2 has 12, for **112 commits on default branch** at time of query. This establishes enumeration, **not** a complete secret scan of those 112 commit diffs or other branches. Branch listing has 35 branches (main plus 34 other branches).
+- Re-read all three workflow definitions. `aa-lf-informe-diario.yml` is manual-only, has `contents: write`, and may commit/push a dated documentation report to the checkout branch after `git pull --rebase`. Recommend restrict to a dedicated documentation branch or require protected review, if future changes authorized.
+- `lec-laboratorio-copia.yml` runs scheduled/manually with `contents: write`, creates backup/work branches, and uses `git push --force-with-lease` **only** to its dated laboratory work branch, not directly to main in the inspected commands. Recommend explicit branch naming and permission restrictions.
+- `aa-auditoria-universal.yml` has `contents: read` and `issues: write`; no third-party secret exfiltration code evident in the reviewed YAML. These are static observations, not a dynamic compromise assessment.
+- `scripts/run-all-tests.cjs` invokes Node with an explicit executable and test-file argument array via `spawnSync` (no shell option set), rather than interpolating test filenames into a shell command. No shell-injection sink evident in this reviewed harness.
+- No changes to game, workflow permissions, dependency files, or contest submission. Audit still requires real dependency vulnerability scans, exhaustive history/content checks, branch protection review and tested remediation.
