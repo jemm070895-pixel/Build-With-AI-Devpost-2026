@@ -90,3 +90,33 @@ The owner confirms that the submitted gameplay video contains **no audio, music,
 
 ## Font and external image-loading review — 2026-10-24
 Inspected the current `src/index.css`, `src/ui/IntroStory.tsx`, `src/App.tsx`, and `index.html`. The inspected stylesheet uses `system-ui, sans-serif` and does not show a Google Fonts import or external font URL in the reviewed matches. The intro renders local `/intro/*.webp` artwork, including the Fehe detail image, with a local fallback if missing. No external image URL was identified in these inspected UI references. This reduces the likelihood of third-party hosted font/image licensing issues in these specific files, but it is not a complete review of all source files, binary media, or the independently edited contest video. The user has confirmed that both game and video are silent.
+
+## Media inventory reconciliation — 2026-10-24
+Compared the original G6.31.1 and later G6.31.19 release archives mounted in the working environment. The original contains 20 image files; the later contains 22 image files, plus a service worker `public/sw.js`. Every one of the following **22 known image paths** was individually fetched from the live GitHub repository with binary/base64 encoding, returning a content SHA. This verifies file existence at the expected paths, not originality, pixel-level identity to the archives, or absence of unlisted media.
+
+1. `public/characters/guard-1.webp` — GitHub presence verified
+2. `public/characters/guard-2.webp` — GitHub presence verified
+3. `public/characters/guard-3.webp` — GitHub presence verified
+4. `public/characters/guard-4.webp` — GitHub presence verified
+5. `public/characters/guard-5.webp` — GitHub presence verified
+6. `public/characters/guard-6.webp` — GitHub presence verified
+7. `public/characters/guard-7.webp` — GitHub presence verified
+8. `public/characters/mui.webp` — GitHub presence verified
+9. `public/characters/REFERENCIA_PERSONAJES.webp` — GitHub presence verified
+10. `public/characters/FEHE_CANONICA_13_PUNTAS.jpeg` — GitHub presence verified
+11. `public/intro/Fehe_original.jpeg` — GitHub presence verified
+12. `public/intro/resistencia.webp` — GitHub presence verified
+13. `public/intro/guardias.webp` — GitHub presence verified
+14. `public/intro/entrega_fehe_canonica.webp` — GitHub presence verified
+15. `public/intro/Fehe_canonica_30cm.jpeg` — GitHub presence verified
+16. `public/intro/claro.webp` — GitHub presence verified
+17. `public/intro/rey.webp` — GitHub presence verified
+18. `public/intro/partida.webp` — GitHub presence verified
+19. `public/intro/entrega_fehe_original.webp` — GitHub presence verified
+20. `public/intro/Fehe_detalle_original.webp` — GitHub presence verified
+21. `public/intro/reino.webp` — GitHub presence verified
+22. `public/intro/entrega_fehe_g63119_limpia.webp` — GitHub presence verified
+
+Also verified `public/sw.js` exists; it is not a media asset.
+
+**Result: 22/22 known image files found in GitHub.** This completes the *known-release-assets presence check*. It does **not** complete a recursive current-repository inventory: a full Git tree listing was not available from the connected file reader, so unknown additional files cannot be ruled out. No claim of independent third-party-rights clearance is made.
