@@ -62,3 +62,13 @@ The live `src/ui/WorldView.tsx` also references `/characters/mui.webp` and dynam
 
 ## Release archive inventory cross-check
 A local inspection of the original G6.31.1 ZIP identified 20 image assets under public/: 10 character images and 10 intro images. A later G6.31.19 ZIP contained 22 image assets: the same 20 plus two Fehe delivery scene variants. These counts refer to inspected release archives, not a complete enumeration of the live GitHub directory. Five named image paths were separately fetched from GitHub and confirmed present. Owner attests the Fehe concept was their original design, while the visual representations and other illustrations were produced with ChatGPT. Individual generation records and external inputs remain unverified.
+
+## Owner clarification and composition trace — 2026-10-24
+The owner believes **all illustrations were created by ChatGPT following their instructions, without third-party image inputs**. This is an owner recollection and is recorded as such, not as independently verified image-generation metadata.
+
+Documentation cross-check:
+- `PERSONAJES_G3_REFERENCIA_2026-10-22.md` explicitly says eight founder portraits (Mui and seven guards) were extracted from the approved `public/characters/REFERENCIA_PERSONAJES.webp` sheet. This supports an internal derivation chain, not eight unrelated external portrait sources.
+- `FEHE_ENTREGA_G6_31_12.md` says the Fehe depicted in the delivery scene was cropped directly from the approved `Fehe_original.jpeg`; it was not replaced by a different generated weapon. This supports an internal composite chain, while the scene background's original generation record is not available in the reviewed documents.
+- `devpost/LICENSING_BOUNDARIES.md` distinguishes MIT code from reserved game artwork and narrative materials, and warns that a root MIT license in a mixed repository can cause interpretation ambiguity. The scope notices in LICENSE and ASSET_RIGHTS.md are therefore important.
+
+**Current finding:** No third-party image source has been identified in the reviewed repository documentation. This is not a reverse-image-search result and does not conclusively establish that all generated assets are independent of third-party material. No evidence of copying or infringement has been established by this review. Pending: complete GitHub asset tree, original prompts/reference uploads and video music/fonts review.
