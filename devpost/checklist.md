@@ -136,3 +136,10 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - The prior local `VIDEO-GAME AZHERYN.mp4` inspection supports a silent ~2:59 game demo with no obvious outside visual assets in sampled frames, but identity with the published YouTube upload has not been independently proven.
 - The owner-reported submitted entry ID `1258683` is retained as testimony; a submission ID alone does not establish the actual public project page or all required form answers.
 - **Pending:** obtain the exact Devpost project page URL or a screenshot of the submitted project form, then verify its GitHub link, YouTube link, English content and required responses. Do not submit again or edit the accepted game merely to address an access limitation.
+
+## Exact Devpost project page supplied — 2026-10-25
+- Owner provided the actual project URL: **https://devpost.com/software/azheryn-v2-chapter-1**. This supersedes previously guessed project slugs.
+- Owner supplied an iPhone Safari screenshot visibly displaying the project page titled **AZHERYN V2 — Chapter 1**, its English short description, an embedded YouTube video, and the `Story` / `Inspiration` section. This is strong owner-provided visual evidence of the live project presentation.
+- The submitted YouTube video URL was separately provided by the owner: https://youtu.be/DTPEt2LiVW4.
+- The external web reader could not retrieve the Devpost project page, and a targeted search returned no indexed result; therefore the entire Story, the Try it out GitHub destination, the submission status/history and private form answers have **not** been independently verified. Do not infer them from the screenshot.
+- **Next owner evidence needed:** screenshot or copied text of the Devpost `Try it out` section and, if desired, the submission-history/status panel. Do not request another submission.
