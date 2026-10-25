@@ -240,3 +240,11 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - On re-review, the owner's Devpost screenshots **do confirm** a populated project description, multiple additional-information responses, and two checked age/eligibility checkboxes, as well as submitted status `ENVIADO` and 5/5 submission steps.
 - **Not independently established:** whether a distinct required *exit survey* was completed, or whether the additional-information questions shown are the entire exit survey. Five completed Devpost steps alone do not prove a separate survey requirement was met.
 - Consequently, Skill 6 is **closed for the verified submission workflow**, but its exit-survey subrequirement is **unverified and must not be represented as independently confirmed**. If the official flow has a separate exit survey, the learner should check its completion status. This note refines the previous dated closure without changing game code, submission fields, license or assets.
+
+
+## Devpost exit survey — owner confirmation (2026-10-25)
+- The project owner reported completing and submitting the separate Devpost/ChallengePost Wufoo exit survey for **Build With AI: Basics**.
+- The survey included occupation, prior hackathon participation, motivations, approximate time spent, primary AI use, optional experience feedback and feedback-session preference.
+- **Evidence level:** owner attestation in conversation; a post-submit confirmation screen or independent receipt was not reviewed. This resolves the previous *owner-confirmation pending* item, without claiming independent verification.
+- The guided submission and exit-survey steps are reported complete. Security follow-ups (including Vite advisories) remain open and separate.
+- No changes to game code, license, assets, or Devpost submission.
