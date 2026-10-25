@@ -47,3 +47,18 @@ Thus the **22 paths represent 20 distinct Git blobs**. This is a concrete techni
 
 **Technical image-path presence and Git identity: 22/22 VERIFIED.**
 **Independently proven creation provenance: OPEN.**
+
+## Legal ownership assessment — 2026-10-24
+**Official sources consulted:**
+1. OpenAI consumer Terms of Use, https://openai.com/policies/row-terms-of-use/ — “Ownership of content”: as between the user and OpenAI, the user retains their rights in inputs and owns outputs to the extent permitted by law; OpenAI assigns any rights it has in outputs. Terms expressly caution that outputs may not be unique and exclude third-party output.
+2. U.S. Copyright Office, January 29, 2025, https://www.copyright.gov/newsnet/2025/1060.html — AI-generated material can qualify for copyright protection when a human has determined sufficient expressive elements, such as protectable human-authored content perceptible in the output or creative arrangements/modifications; prompts alone are insufficient.
+3. U.S. Copyright Office AI registration guidance, https://www.copyright.gov/ai/ai_policy_guidance.pdf — AI-generated portions must be distinguished from human-authored material when seeking registration.
+
+**Application to this project (not legal advice):**
+- All 22 repository image paths are technically verified. They comprise 20 distinct Git blobs, with two duplicate pairs documented above.
+- The owner reports directing ChatGPT to create the artwork and independently designing the Fehe. Under OpenAI's terms, OpenAI does not retain exclusive ownership of the outputs against the user; this supports the owner's right to use and distribute generated illustrations, **subject to third-party rights and applicable law**.
+- Human-authored Fehe design details, story, original selection and creative composition may be copyrightable to the extent their human expression meets the applicable legal standard. This does **not** automatically confer exclusive copyright over each entire AI-generated image.
+- The 22 files cannot be legally certified as exclusively copyrighted to the owner without original prompt/input records, a review of human creative contributions to each work and, where relevant, third-party source checks. Lack of those records is not evidence of infringement.
+- Do not present this report as a copyright registration, a legal opinion, or a guarantee of uniqueness. Preserve the game images; no automatic replacement is indicated.
+
+**Status for each of the 22 listed paths:** technical Git identity VERIFIED; owner claim and OpenAI terms documented; individual exclusive-copyright status NOT INDEPENDENTLY DETERMINED. No third-party source identified in reviewed repository documents. The next meaningful evidence is original generation conversations or source files, not repeated code searches.
