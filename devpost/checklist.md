@@ -272,3 +272,12 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - Reviewed `src/world/saveTransfer.ts`, `saveRecovery.ts`, `saveSlots.ts`: imported JSON limited to 8,000,000 characters in `decodePortableSave`, guarded by schema checks; storehouse coordinates and progress require finite numbers. `isUsableChapterSave` validates essential character fields but not all nested arrays, lengths or element shapes. This is a **validation-hardening opportunity**, not proof of an exploit.
 - Reviewed `INICIAR_JUEGO_WINDOWS.bat`: local-only `127.0.0.1` dev server; it builds before launch, but launches Vite dev mode, exposing the previously identified development-server advisory to the local host context. `JUGAR_EN_LAPTOP_TABLET_TELEFONO.bat` serves built output through Vite preview bound to `0.0.0.0` for trusted local Wi-Fi and explicitly warns to use private networks. Preview is not a hardened public production server; avoid public/untrusted network exposure.
 - No source, license or launchers changed. No dynamic tests or full-history scans were performed; 100% security certification remains unavailable.
+
+
+## Security audit — targeted application sink review (2026-10-25)
+- Attempted broad per-file scan through GitHub connector; connector execution hit its maximum tool-call limit, so **no full-codebase scan is claimed**.
+- Independently inspected targeted text search for high-risk patterns in `azheryn-v2/src/App.tsx`, `src/main.tsx`, `src/ui/IntroStory.tsx`, `src/ui/WorldView.tsx`, `src/world/saveTransfer.ts`, `src/world/saveSlots.ts`, `azheryn-app/src/main.tsx`, and `azheryn-v2/scripts/preflight-offline.cjs`.
+- In the checked source files, no literal `dangerouslySetInnerHTML`, `.innerHTML`, `eval(`, `new Function(`, or `fetch(` matches were found. This is only a limited string-pattern review; other network and injection mechanisms were not exhaustively ruled out.
+- `WorldView.tsx` includes 12 `localStorage` references and one `URL.createObjectURL` reference; `IntroStory.tsx` references both `localStorage` and `sessionStorage`. These are not vulnerabilities by themselves; full data-flow review remains open.
+- `scripts/run-all-tests.cjs` imports `child_process`; test harness process execution is expected, but shell invocation arguments were not exhaustively reviewed.
+- Security status remains open: dependency audit, full content/history secret scan, remediation and dynamic verification are still outstanding. No game code modified.
