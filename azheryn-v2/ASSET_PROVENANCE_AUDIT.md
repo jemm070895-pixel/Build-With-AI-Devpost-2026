@@ -84,3 +84,6 @@ Documentation cross-check:
 
 ## Owner confirmation: no game audio — 2026-10-24
 The owner confirms that the current game has **no music and no audio**. GitHub indexed-code searches for `AudioContext`, `new Audio(`, `<audio`, `speechSynthesis`, `playSound`, `.mp3`, `.wav`, and `.ogg` found no matching code references. Treat the in-game soundtrack/sound-effect licensing item as **not applicable to the current release** based on owner confirmation and code search, not as a comprehensive recursive binary scan. This does **not** establish whether the separately edited YouTube/Devpost demo video contains audio, music, stock footage, templates, or other third-party materials; those remain separate checks.
+
+## Owner confirmation: demo video has no audio — 2026-10-24
+The owner confirms that the submitted gameplay video contains **no audio, music, sound effects, or narration**. Accordingly, audio and music licensing is **not applicable** to either the current Chapter 1 game or its submitted video, based on the owner's first-hand confirmation. The video itself has not been independently inspected for its audio tracks or for visual overlays, fonts, or externally sourced editing elements. Do not present those separate visual/editorial rights checks as completed.
