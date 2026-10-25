@@ -234,3 +234,9 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - **Separate OPEN security follow-up:** complete dependency vulnerability audit, evaluate Vite 8.3.2 advisories and fix after explicit authorization/testing, verify GitHub branch protections/secret scanning, and review history beyond the sampled 100 commits. The 6-ship closure does not supersede these outstanding checks.
 - Older `SKILL6_PREVIDEO_PREPARATION.md`, `SKILL6_EVIDENCE_MAP_2026-10-23.md`, and `LEARNER_AUTHORED_DESCRIPTION_2026-10-23.md` contain historical pre-submission pending statements; this dated entry supersedes their shipping-status statements without rewriting their history.
 - No game source, license, media or Devpost submission was changed.
+
+
+## Skill 6 — precise evidence correction (2026-10-25)
+- On re-review, the owner's Devpost screenshots **do confirm** a populated project description, multiple additional-information responses, and two checked age/eligibility checkboxes, as well as submitted status `ENVIADO` and 5/5 submission steps.
+- **Not independently established:** whether a distinct required *exit survey* was completed, or whether the additional-information questions shown are the entire exit survey. Five completed Devpost steps alone do not prove a separate survey requirement was met.
+- Consequently, Skill 6 is **closed for the verified submission workflow**, but its exit-survey subrequirement is **unverified and must not be represented as independently confirmed**. If the official flow has a separate exit survey, the learner should check its completion status. This note refines the previous dated closure without changing game code, submission fields, license or assets.
