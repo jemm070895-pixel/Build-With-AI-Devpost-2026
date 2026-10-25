@@ -81,3 +81,6 @@ Documentation cross-check:
 - The documented provenance chain for founder portraits and Fehe delivery remains internal to owner-approved/ChatGPT-generated images, subject to verification of any supplied generation references.
 
 **Finding:** No identified third-party artwork source in the examined documents or indexed code search. Not a legal opinion, comprehensive binary scan, or conclusive copyright clearance.
+
+## Owner confirmation: no game audio — 2026-10-24
+The owner confirms that the current game has **no music and no audio**. GitHub indexed-code searches for `AudioContext`, `new Audio(`, `<audio`, `speechSynthesis`, `playSound`, `.mp3`, `.wav`, and `.ogg` found no matching code references. Treat the in-game soundtrack/sound-effect licensing item as **not applicable to the current release** based on owner confirmation and code search, not as a comprehensive recursive binary scan. This does **not** establish whether the separately edited YouTube/Devpost demo video contains audio, music, stock footage, templates, or other third-party materials; those remain separate checks.
