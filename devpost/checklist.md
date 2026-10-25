@@ -179,3 +179,11 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - Branch search returned **35 branches**: `main`, 17 dated `lec/laboratorio-*` branches and 17 dated `lec/respaldo-*` branches (Oct 8–24). A branch-history exposure review must include these, not only main.
 - Fetched and inspected diffs for the **eight most recent commits** (`e1f8685a`, `f798ec7f`, `ee0c7f1a`, `d8e432d9`, `b3a8a25e`, `bd75bdd6`, `f77b5bf2`, `ea3b5d6f`). No exact-pattern private-key delimiters, `ghp_`/`github_pat_` tokens or AWS AKIA identifiers detected in those eight diffs. This is not a scan of all 98 commits or all branches.
 - An attempted larger batch exceeded connector call limits. Historical scanning remains incomplete. Do not claim full certification or 100% completion.
+
+
+## Security audit continuation — 2026-10-25
+- GitHub connector confirms repository visibility `public`, default branch `main`, and administrative access for the connected account.
+- Branch search returned 35 named branches: `main`, 17 `lec/laboratorio-*` and 17 `lec/respaldo-*`. Branch contents and full histories are **not** yet individually scanned.
+- Commit search returned recent commit references. Six newest commits (`161827050`, `e1f8685a7`, `f798ec7f1`, `ee0c7f1`, `d8e432d95`, `b3a8a25e`) were fetched and each changes only `devpost/checklist.md` according to the returned commit file lists. Pattern matches for secret-like words in two diffs refer to audit documentation and are **not evidence of exposed credentials**; no actual secret was confirmed in this sample.
+- Earlier indexed searches for common token/key patterns and `.gitignore` checks were documented previously; those are not a complete scan of history, other branches, binaries, GitHub Actions secrets, or dependency vulnerabilities.
+- **Status: OPEN.** Do not claim all commits/branches clean or GitHub security settings verified. No gameplay, media, license, or Devpost submission changes authorized.
