@@ -149,3 +149,8 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - **Try it out** displays a clickable **GitHub Repo** link. Its precise destination is not exposed in the screenshot and is not independently verified.
 - **SUBMITTED TO** visibly identifies **Build With AI: Basics**, shows a time-to-submit notice and an **Edit hackathon submission** control. This is owner-supplied visual evidence that the project is associated with an editable hackathon submission; it is not a view of private required answers or a guarantee of judging eligibility.
 - Remaining checks: confirm the GitHub Repo hyperlink destination; review repository secret/privacy exposure and any required private submission fields, including Skill 6, without exposing sensitive values.
+
+## GitHub link opened from Devpost — owner photo, 2026-10-25
+- Owner followed the **GitHub Repo** link on the Devpost project and photographed the resulting browser page. The visible repository breadcrumb is `jemm070895-pixel / Build-With-AI-Devpost-2026`, with GitHub's **Public** badge.
+- This is direct user-provided visual confirmation that Devpost's GitHub Repo link opens the intended public repository. Mark the project-to-repository destination check **confirmed**.
+- The photo does not establish repository history-wide secret scanning, all private Devpost form responses, or Skill 6 completion; retain those as final audit checks.
