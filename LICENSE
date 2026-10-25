@@ -26,5 +26,5 @@ This license applies to original software code in azheryn-v2/src/,
 azheryn-v2/scripts/, azheryn-v2/tests/, azheryn-v2/tools/ and original
 build configuration files in azheryn-v2/. It does NOT license image,
 illustration, sound, or other creative media in azheryn-v2/public/ or
-the broader AZHERYN fictional universe. See ASSET_RIGHTS.md.
+the broader AZHERYN fictional universe. See azheryn-v2/ASSET_RIGHTS.md.
 Third-party dependencies retain their own licenses.
