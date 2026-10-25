@@ -25,6 +25,10 @@ Open the local address printed by Vite. The downloadable Windows package also in
 - Time, weather, animals, mission journal and story replay
 - Bilingual interface and end-of-chapter epilogue
 
+## Audio and media
+
+This Chapter 1 release has no in-game music, sound effects, or narration. The owner also confirms that the submitted gameplay video is silent. The illustrations were generated with ChatGPT following the owner's creative direction; the Fehe design is the owner's original creation. Individual image-generation records and any supplied references have not been independently audited. See [asset provenance audit](ASSET_PROVENANCE_AUDIT.md).
+
 ## Licensing
 
 Original source code in the paths specified by [LICENSE](LICENSE) is MIT-licensed. Game media in `public/` and original fictional-world materials are **not MIT-licensed**; see [ASSET_RIGHTS.md](ASSET_RIGHTS.md). Third-party packages retain their own licenses.
