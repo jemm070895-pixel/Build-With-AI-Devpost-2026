@@ -143,3 +143,9 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - The submitted YouTube video URL was separately provided by the owner: https://youtu.be/DTPEt2LiVW4.
 - The external web reader could not retrieve the Devpost project page, and a targeted search returned no indexed result; therefore the entire Story, the Try it out GitHub destination, the submission status/history and private form answers have **not** been independently verified. Do not infer them from the screenshot.
 - **Next owner evidence needed:** screenshot or copied text of the Devpost `Try it out` section and, if desired, the submission-history/status panel. Do not request another submission.
+
+## Owner screenshot: Devpost Try it out and submitted contest — 2026-10-25
+- Screenshot shows the exact project page's **Built With** tags: canvas, chatgpt, github, github-copilot, html5, javascript, react, typescript, visual-studio-code, vite.
+- **Try it out** displays a clickable **GitHub Repo** link. Its precise destination is not exposed in the screenshot and is not independently verified.
+- **SUBMITTED TO** visibly identifies **Build With AI: Basics**, shows a time-to-submit notice and an **Edit hackathon submission** control. This is owner-supplied visual evidence that the project is associated with an editable hackathon submission; it is not a view of private required answers or a guarantee of judging eligibility.
+- Remaining checks: confirm the GitHub Repo hyperlink destination; review repository secret/privacy exposure and any required private submission fields, including Skill 6, without exposing sensitive values.
