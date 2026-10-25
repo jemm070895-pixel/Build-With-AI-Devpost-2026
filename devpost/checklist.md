@@ -220,3 +220,17 @@ A local file available in the working environment, `VIDEO-GAME AZHERYN.mp4`, was
 - **Confirmed actionable advisory match:** `vite@8.3.2` is within the affected range for GitHub-reviewed GHSA-rq7h-c2jc-7f22 (file access outside configured allowlist under certain project path conditions; fixed in Vite 8.3.3), and GHSA-9jrq-w75r-8gcw (cross-origin script execution through Vite custom middleware; fixed in Vite 8.3.3). References: https://github.com/advisories/GHSA-rq7h-c2jc-7f22 and https://github.com/advisories/GHSA-9jrq-w75r-8gcw . Both primarily concern development-server exposure; exploitability for this game's configuration has **not** been established.
 - **Recommended post-submission remediation:** update Vite to a currently patched compatible version (at least 8.3.3), regenerate lockfile, run `npm audit`, TypeScript/build/test suite and Windows/mobile smoke tests, and review dev-server exposure. Do not change the submitted game without explicit authorization.
 - Full `npm audit` and GitHub repository secret-scanning/branch-protection status remain unverified. No gameplay, assets, license or Devpost submission changed in this audit.
+
+
+## Skill 6 — shipping walkthrough closure (2026-10-25)
+**Status: CLOSED as a guided submission milestone**, based on the owner's Devpost screenshots and previously documented evidence. This closure does not certify repository security, judging eligibility or external link accessibility.
+
+- Final approved Chapter 1 game was built and tested by the owner on Windows; code and release documentation are present in the public GitHub repository.
+- Public GitHub project link was confirmed from the Devpost submission by owner-provided browser screenshots.
+- The owner supplied a demo video URL: https://youtu.be/DTPEt2LiVW4 . The URL was provided and recorded; this update does not independently verify anonymous playback, duration or exact video content.
+- The project owner supplied original long-form project wording; the Devpost screenshots show the submitted project Story and other filled answers. The exact authorship of every individual submitted field was not independently audited.
+- Devpost screenshots show the official project `AZHERYN V2 — Capítulo 1`, status **ENVIADO**, **5/5 steps complete**, and checked eligibility controls; additional-information responses were also visible. These are evidence of completion of the submission workflow, not a guarantee of eligibility or judging outcome.
+- The original 6-ship skill has no mandatory peer review, Discord post or deployment requirement. The guided shipping process can therefore be closed without those optional activities.
+- **Separate OPEN security follow-up:** complete dependency vulnerability audit, evaluate Vite 8.3.2 advisories and fix after explicit authorization/testing, verify GitHub branch protections/secret scanning, and review history beyond the sampled 100 commits. The 6-ship closure does not supersede these outstanding checks.
+- Older `SKILL6_PREVIDEO_PREPARATION.md`, `SKILL6_EVIDENCE_MAP_2026-10-23.md`, and `LEARNER_AUTHORED_DESCRIPTION_2026-10-23.md` contain historical pre-submission pending statements; this dated entry supersedes their shipping-status statements without rewriting their history.
+- No game source, license, media or Devpost submission was changed.
