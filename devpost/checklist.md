@@ -100,3 +100,24 @@ Peer feedback, Discord posts and live deployment are **optional** per the instal
 - [ ] Audit each published image/media file for origin, generation method, third-party rights, and permitted public redistribution. ASSET_RIGHTS.md is a scope notice, not provenance proof.
 - [ ] Independently verify submitted Devpost page and linked demo video.
 - [ ] Close Skill 6 only after its remaining required evidence and learner-owned tasks are confirmed; do not claim completion based solely on submission.
+
+## Consolidated remaining checks — 2026-10-24
+This section supersedes older **pending-to-submit** wording above; older entries remain as historical snapshots rather than being silently rewritten.
+
+**Completed / owner-confirmed:**
+- [x] Devpost entry submitted, as reported by owner (entry ID 1258683); the entry's public URL and form fields have not been independently re-opened.
+- [x] Gameplay video uploaded to YouTube and linked in submission, as reported by owner; runtime 2:59 and video is unlisted. Its exact URL has not been independently re-opened.
+- [x] Owner launched the public GitHub checkout on Windows and accepted the English HUD/gameplay.
+- [x] Owner confirms no music, sound effects or narration in either the game or the submitted video; audio-rights checks are not applicable to this release.
+- [x] English README includes launch instructions, owner-designed Fehe, ChatGPT-assisted illustration provenance, and rights boundary; root LICENSE now points to the correct `azheryn-v2/ASSET_RIGHTS.md` path.
+- [x] Documented internal derivation: founder portrait sheet to eight portraits; approved Fehe illustration to delivery-scene composite. No identified third-party visual source in the examined project documentation.
+
+**Outstanding, do not claim completed:**
+- [ ] Obtain a recursive list of the **current public GitHub** media tree and reconcile it against release-archive inventories (20 images in original G6.31.1; 22 in later G6.31.19). Current binary tree not independently enumerated.
+- [ ] Examine original generation prompts, any uploaded reference images and editing inputs, where available, for individual provenance; no copying or infringement has been identified, but exclusivity and third-party clearance are not conclusively established.
+- [ ] Independently view the submitted video for visual overlays, stock clips, editor templates or other externally sourced media. Owner reports the video is silent.
+- [ ] Independently open the Devpost entry and unlisted YouTube URL and confirm links/English form answers, if accessible. Do not request a new video or a new submission.
+- [ ] Review repository files/history for accidentally committed secrets or private data. Indexed search alone is not a comprehensive history scan; common learner-profile paths were not present when checked.
+- [ ] Verify remaining learner-owned Skill 6 fields (reflection in submitted form, age/exit survey if required) against the actual submission record before marking 6-ship closed.
+
+**Release rule:** Do not alter accepted Chapter 1 gameplay or replace images solely because generation records are unavailable. Any future claim of full rights clearance requires evidence, not inference.
