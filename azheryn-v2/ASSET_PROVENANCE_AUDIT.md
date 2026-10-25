@@ -72,3 +72,12 @@ Documentation cross-check:
 - `devpost/LICENSING_BOUNDARIES.md` distinguishes MIT code from reserved game artwork and narrative materials, and warns that a root MIT license in a mixed repository can cause interpretation ambiguity. The scope notices in LICENSE and ASSET_RIGHTS.md are therefore important.
 
 **Current finding:** No third-party image source has been identified in the reviewed repository documentation. This is not a reverse-image-search result and does not conclusively establish that all generated assets are independent of third-party material. No evidence of copying or infringement has been established by this review. Pending: complete GitHub asset tree, original prompts/reference uploads and video music/fonts review.
+
+## Additional licensing and media check — 2026-10-24
+- Verified the repository's root `LICENSE` and `azheryn-v2/LICENSE`: both contain the MIT text followed by an explicit scope notice limiting the grant to original code/build tooling and excluding media under `public/`. The root license points readers to `ASSET_RIGHTS.md`; the game-level notice exists at `azheryn-v2/ASSET_RIGHTS.md`. To avoid ambiguity, references from the root should use the full relative path.
+- Verified `azheryn-v2/package.json`: runtime dependencies are React and React DOM; development dependencies are React types, Vite, React plugin and TypeScript. Their upstream licenses apply independently of the game artwork. This dependency listing does not prove that every transitive dependency license has been audited.
+- GitHub code search for `.mp3`, `.wav`, `.ogg`, `.woff`, `.ttf` and `unsplash` returned no indexed code matches. **Search absence does not establish absence of binary files or external assets.**
+- The demo video's soundtrack, editing templates, fonts, thumbnails and any other externally sourced material have not been inspected. Do not represent the video as fully rights-cleared without that check.
+- The documented provenance chain for founder portraits and Fehe delivery remains internal to owner-approved/ChatGPT-generated images, subject to verification of any supplied generation references.
+
+**Finding:** No identified third-party artwork source in the examined documents or indexed code search. Not a legal opinion, comprehensive binary scan, or conclusive copyright clearance.
